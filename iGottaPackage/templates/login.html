@@ -4,6 +4,7 @@
     <h1>Sign In</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
+        {# The form.hidden_tag() template argument generates a hidden field that includes a token that, along with your SECRET_KEY is used by Flask-WTF to protect the form against CSRF attacks. #}
         <p>
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}
