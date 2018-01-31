@@ -26,6 +26,7 @@ def index():
 def login():
     form = LoginForm()
     if form.validate_on_submit(): # When the browser sends the GET request to receive the web page with the form, this method is going to return False, so in that case the function skips the if statement and goes directly to render the template in the last line of the function.
+        # POST request causes form.validate_on_submit() to gather all the data, run the validators, and if so, return True.
         flash('Login requested for user {}, remember_me={}'.format(
             form.username.data, form.remember_me.data))
         return redirect('/index')
