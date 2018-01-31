@@ -37,6 +37,5 @@ nosetests.xml
 
 venv
 app.db
-microblog.log*
+igotta.log*
 .env
-config.py
