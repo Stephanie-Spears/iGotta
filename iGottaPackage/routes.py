@@ -30,4 +30,5 @@ def login():
         flash('Login requested for user {}, remember_me={}'.format(
             form.username.data, form.remember_me.data))
         return redirect(url_for('/index'))
+    # The argument to url_for() is the endpoint name, which is the name of the view function.
     return render_template('login.html', title='Sign In', form=form)
