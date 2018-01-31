@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
 from iGottaPackage import app
 from iGottaPackage.forms import LoginForm
 
@@ -29,5 +29,5 @@ def login():
         # POST request causes form.validate_on_submit() to gather all the data, run the validators, and if so, return True.
         flash('Login requested for user {}, remember_me={}'.format(
             form.username.data, form.remember_me.data))
-        return redirect('/index')
+        return redirect(url_for('/index'))
     return render_template('login.html', title='Sign In', form=form)
