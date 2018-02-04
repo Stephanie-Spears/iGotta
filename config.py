@@ -9,7 +9,6 @@ class Config(object):
     FLASK_APP = os.environ.get('FLASK_APP') or os.path.join(basedir, 'igotta.py')
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'supersecretdontstealitplzlolololz'
 
-    # TODO: change PRODUCTION_DB to HEROKU_DB on deploy
     SQLALCHEMY_DATABASE_URI = os.environ.get('PRODUCTION_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
