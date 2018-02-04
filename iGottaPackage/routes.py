@@ -59,24 +59,6 @@ def index():
 # A python decorator (@) modifies the function that follows it. Usually they're used to register functions as callbacks for certain events. In this case, the @app.route decorator creates an association between the URL given as an argument and the function. In this example there are two decorators, which associate the URLs '/' and '/index' to this function. This means that when a web browser requests either of these two URLs, Flask is going to invoke this function and pass the return value of it back to the browser as a response.
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:  # current_user is from Flask-Login
-        return redirect(url_for('index'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
-        return redirect(next_page)
-    return render_template('login.html', title='Sign In', form=form)
-
-
 @app.route('/user/<username>')
 @login_required
 def user(username):
