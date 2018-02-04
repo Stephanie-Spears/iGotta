@@ -11,7 +11,7 @@ class User(db.Model):
     # The backref argument defines the name of a field that will be added to the objects of the "many" class that points back at the "one" object. This will add a post.author expression that will return the user given a post.
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<User {}, {}>'.format(self.username, self.email)
 
 
 # TODO: add rating average, maybe comments
@@ -27,4 +27,4 @@ class Post(db.Model):
     # 'user' is the db table, which Flask-SQLAlchemy automatically sets to the name of the model class converted to lowercase.
 
     def __repr__(self):
-        return '<Post {}>'.format(self.body)
+        return '<Post {}, {}, {}>'.format(self.title, self.body, self.address)
