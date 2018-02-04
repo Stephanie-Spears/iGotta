@@ -10,9 +10,6 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'supersecretdontstealitplzlolololz'
 
     # TODO: change PRODUCTION_DB to HEROKU_DB on deploy
-    #Example: mysql://username:password@server/db
-    #       postgresql://scott:tiger@localhost/mydatabase
-    #       sqlite:////absolute/path/to/foo.db
     SQLALCHEMY_DATABASE_URI = os.environ.get('PRODUCTION_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
