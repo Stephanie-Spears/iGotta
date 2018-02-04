@@ -22,7 +22,7 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-
+# Each time the logged-in user navigates to a new page, Flask-Login retrieves the ID of the user from the session, and then loads that user into memory. Flask-Login doesn't connect to the db, so the extension expects that the application will configure a user loader function, that can be called to load a user given the ID. 
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
