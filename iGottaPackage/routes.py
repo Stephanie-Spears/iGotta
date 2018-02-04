@@ -1,6 +1,8 @@
 from flask import render_template, flash, redirect, url_for
 from iGottaPackage import app
 from iGottaPackage.forms import LoginForm
+from flask_login import current_user, login_user
+from iGottaPackage.models import User
 
 
 @app.route('/')
@@ -25,11 +27,13 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = LoginForm()
-    if form.validate_on_submit(): # When the browser sends the GET request to receive the web page with the form, this method is going to return False, so in that case the function skips the if statement and goes directly to render the template in the last line of the function.
-        # POST request causes form.validate_on_submit() to gather all the data, run the validators, and if so, return True.
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return redirect(url_for('/index'))
-    # The argument to url_for() is the endpoint name, which is the name of the view function.
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
