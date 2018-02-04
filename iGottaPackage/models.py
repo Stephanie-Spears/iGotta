@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+# flask_login extension handles our user login, and requires three properties and one method get implemented to work (is_authenticated/is_active/is_anonymous/get_id()). They are pretty generic, so flask-login provides a simple UserMixin class to do it for us.
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
