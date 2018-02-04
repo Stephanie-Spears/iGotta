@@ -2,6 +2,7 @@ from datetime import datetime
 from iGottaPackage import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from hashlib import md5
 
 
 # flask_login extension handles our user login, and requires three properties and one method get implemented to work (is_authenticated/is_active/is_anonymous/get_id()). They are pretty generic, so flask-login provides a simple UserMixin class to do it for us.
@@ -22,7 +23,12 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-# Each time the logged-in user navigates to a new page, Flask-Login retrieves the ID of the user from the session, and then loads that user into memory. Flask-Login doesn't connect to the db, so the extension expects that the application will configure a user loader function, that can be called to load a user given the ID. 
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
+
+
+# Each time the logged-in user navigates to a new page, Flask-Login retrieves the ID of the user from the session, and then loads that user into memory. Flask-Login doesn't connect to the db, so the extension expects that the application will configure a user loader function, that can be called to load a user given the ID.
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

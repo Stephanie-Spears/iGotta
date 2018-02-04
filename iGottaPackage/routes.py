@@ -68,6 +68,10 @@ def user(username):
         {'author': user, 'title': 'test title 2', 'body': 'Test post #2', 'address': 'Test address #2'},
     ]
     return render_template('user.html', user=user, posts=posts)
+<<<<<<< HEAD
+=======
+
+>>>>>>> a2a9e2e3b27bd24bd4a9dbabe72b8d707b69261a
 
 
 @app.route('/logout')
