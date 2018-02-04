@@ -65,6 +65,8 @@ def user(username):
         {'author': user, 'title': 'test title 1', 'body': 'Test post #1', 'address': 'Test addresss #1'},
         {'author': user, 'title': 'test title 2', 'body': 'Test post #2', 'address': 'Test address #2'},
     ]
+    return render_template('user.html', user=user, posts=posts)
+
 
 
 @app.route('/logout')
