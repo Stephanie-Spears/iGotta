@@ -27,7 +27,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated:  # current_user is from Flask-Login
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
