@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from iGottaPackage.models import User
 
@@ -27,3 +27,13 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+
+class AddBathroomForm(FlaskForm):
+    lat = FloatField('latitude', validators=[DataRequired()])
+    lng = FloatField('longitude', validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()])
+    picture = StringField('Picture')
+    body = TextAreaField('Description', validators=[DataRequired()])
+
+    # def validate_location(self, lat, lng):

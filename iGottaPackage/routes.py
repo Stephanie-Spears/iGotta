@@ -2,9 +2,19 @@ from flask import render_template, redirect, url_for, flash, request
 from iGottaPackage import app, db
 from iGottaPackage.forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
-from iGottaPackage.models import User
+from iGottaPackage.models import User, Post, Bathroom
 from werkzeug.urls import url_parse
 from iGottaPackage.forms import RegistrationForm
+from datetime import datetime
+from flask_googlemaps import GoogleMaps, Map
+
+
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_on = datetime.utcnow()
+        db.session.commit()
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -74,4 +84,21 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
+# set up lat/lng parser from addresses? make db pass them in loop here?
+@app.route('/maps')
+def maps():
+    bathrooms = Bathroom.query.all()
+    mymap = Map(
+        identifier='bathroomMap',
+        lat=45.502556,
+        lng=-122.632595,
+        style="height:100%; width:100%;",
+        # maptype_control=True,
+        markers=[{'lat': b.lat, 'lng': b.lng, 'infobox': b.set_infobox(b.title, b.picture, b.body),                'icon': 'static/img/toilet-icon.png'} for b in bathrooms])
+    return render_template('maps.html', mymap=mymap,)
+
+    # 'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            # {'lat': 45.502556, 'lng': 122.632595, 'infobox': 'test infobox', 'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'},
+            #      {'lat': 45.502556, 'lng': 122.632595, 'infobox': 'test infobox', 'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'}])
 

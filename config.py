@@ -14,4 +14,6 @@ class Config(object):
 
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-    GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+    GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')

@@ -3,6 +3,7 @@ from iGottaPackage import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
+# from sqlalchemy_imageattach.entity import Image, image_attachment
 
 
 class User(UserMixin, db.Model):
@@ -11,6 +12,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    last_on = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return '<User {}, {}>'.format(self.username, self.email)
@@ -38,8 +40,34 @@ class Post(db.Model):
     body = db.Column(db.String(140))
     photo = db.Column(db.String(240), nullable=True)
     address = db.Column(db.String(240), unique=True)
+    lat = db.Column(db.Integer)
+    lng = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Post {}, {}, {}>'.format(self.title, self.body, self.address)
+
+
+class Bathroom(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    lat = db.Column(db.Float, nullable=False)
+    lng = db.Column(db.Float, nullable=False)
+    title = db.Column(db.String(120), nullable=False)
+    body = db.Column(db.String(360), nullable=False)
+    picture = db.Column(db.String(240), nullable=True)
+
+    def set_infobox(self, title, picture, body):
+        infobox = "<div><h1>" + str(title) + "</h1><hr><img src='" + str(picture) + "'><hr><p>" + str(
+            body) + "</p></div>"
+        return infobox
+
+    # picture = image_attachment('BathroomPicture')
+
+    def __repr__(self):
+        return '<Bathroom Lat: {}, Lng: {}, Title: {}, Body: {}, Picture: {}, Infobox: {}>'.format(self.lat, self.lng, self.title, self.body, self.picture, self.infobox)
+
+#
+# class BathroomPicture(db.Model, Image):
+#     bathroom_id = db.Column(db.Integer, db.ForeignKey('bathroom.id'), primary_key=True)
+#     bathroom = db.relationship('Bathroom')
