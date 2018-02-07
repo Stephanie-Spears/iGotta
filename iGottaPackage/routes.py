@@ -4,9 +4,10 @@ from iGottaPackage.forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
 from iGottaPackage.models import User, Post, Bathroom
 from werkzeug.urls import url_parse
-from iGottaPackage.forms import RegistrationForm
+from iGottaPackage.forms import RegistrationForm, AddBathroomForm
 from datetime import datetime
 from flask_googlemaps import GoogleMaps, Map
+from werkzeug.utils import secure_filename
 
 
 
@@ -102,3 +103,16 @@ def maps():
             # {'lat': 45.502556, 'lng': 122.632595, 'infobox': 'test infobox', 'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'},
             #      {'lat': 45.502556, 'lng': 122.632595, 'infobox': 'test infobox', 'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'}])
 
+
+@login_required
+@app.route('/add_bathroom', methods=['GET', 'POST'])
+def add_bathroom():
+    form = AddBathroomForm()
+    if request.method == 'GET':
+        return render_template('add_bathroom.html', form=form)
+    if form.validate_on_submit():
+        bathroom = Bathroom(title=form.title.data, body=form.body.data, lat=form.lat.data, lng=form.lng.data, picture=form.picture.data, creator=current_user)
+        db.session.add(bathroom)
+        db.session.commit()
+        flash('Your bathroom has been added!')
+        return redirect(url_for('maps'))

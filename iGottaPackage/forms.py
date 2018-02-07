@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField
-from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
-from iGottaPackage.models import User
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField, FileField
+from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Optional, Length
+from iGottaPackage.models import User, Post, Bathroom
 
 
 class LoginForm(FlaskForm):
@@ -33,7 +33,15 @@ class AddBathroomForm(FlaskForm):
     lat = FloatField('latitude', validators=[DataRequired()])
     lng = FloatField('longitude', validators=[DataRequired()])
     title = StringField('Title', validators=[DataRequired()])
-    picture = StringField('Picture')
-    body = TextAreaField('Description', validators=[DataRequired()])
+    # picture = FileField('Picture', validators=[FileRequired()])
+    picture = FileField('Picture', validators=[Optional()])
+    body = TextAreaField('Description', validators=[Length(min=0, max=280)])
+    submit = SubmitField('Add it')
 
-    # def validate_location(self, lat, lng):
+    def validate_location(self, lat, lng):
+        lat = Bathroom.query.filter_by(lat=lat.data).first()
+        lng = Bathroom.query.filter_by(lng=lng.data).first()
+        if (lat is not None) and (lng is not None):
+            raise ValidationError('This location has already been registered.')
+
+# validate photo properties?
