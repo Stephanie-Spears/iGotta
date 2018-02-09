@@ -1,0 +1,246 @@
+# Japanese translations for PROJECT.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-02-09 05:35-0800\n"
+"PO-Revision-Date: 2018-02-09 05:14-0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+
+#: iGottaPackage/__init__.py:21
+msgid "Please log in to access this page."
+msgstr "Veuillez vous connecter pour accéder à cette page"
+
+#: iGottaPackage/email.py:22
+msgid "[iGotta] Reset Your Password"
+msgstr "[iGotta] Réinitialiser votre mot de passe"
+
+#: iGottaPackage/forms.py:34
+msgid "Email"
+msgstr "Email"
+
+#: iGottaPackage/forms.py:35 iGottaPackage/forms.py:43
+msgid "Request Password Reset"
+msgstr "Demander le mot de passe"
+
+#: iGottaPackage/forms.py:39
+msgid "Password"
+msgstr "Mot de passe"
+
+#: iGottaPackage/forms.py:41
+msgid "Repeat Password"
+msgstr "Répéter le mot de passe"
+
+#: iGottaPackage/forms.py:47
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: iGottaPackage/forms.py:48
+msgid "About me"
+msgstr "A propos de moi"
+
+#: iGottaPackage/forms.py:50 iGottaPackage/forms.py:65
+msgid "Submit"
+msgstr "Envoyer"
+
+#: iGottaPackage/forms.py:60
+msgid "Please use a different username."
+msgstr "Veuillez utiliser un nom d'utilisateur différent."
+
+#: iGottaPackage/forms.py:64
+msgid "Say something"
+msgstr "Dis quelque chose !"
+
+#: iGottaPackage/routes.py:37
+msgid "Congratulations, you are now registered with iGotta!"
+msgstr "Félicitations, vous êtes maintenant inscrit avec iGotta!"
+
+#: iGottaPackage/routes.py:39 iGottaPackage/templates/register.html:5
+msgid "Register"
+msgstr "Registre"
+
+#: iGottaPackage/routes.py:50
+msgid "Invalid username or password"
+msgstr "Invalid username or password"
+
+#: iGottaPackage/routes.py:57 iGottaPackage/templates/login.html:6
+msgid "Sign In"
+msgstr "Se connecter"
+
+#: iGottaPackage/routes.py:69
+msgid "Your post is now live!"
+msgstr "Votre message est maintenant en ligne!"
+
+#: iGottaPackage/routes.py:78 iGottaPackage/templates/base.html:26
+msgid "Home"
+msgstr "Départ"
+
+#: iGottaPackage/routes.py:93 iGottaPackage/templates/base.html:27
+msgid "Explore"
+msgstr "Explorer"
+
+#: iGottaPackage/routes.py:126
+msgid "Your changes have been saved."
+msgstr "Vos changements ont été enregistrés."
+
+#: iGottaPackage/routes.py:131 iGottaPackage/templates/edit_profile.html:5
+msgid "Edit Profile"
+msgstr "Editer le profil"
+
+#: iGottaPackage/routes.py:139 iGottaPackage/routes.py:155
+#, python-format
+msgid "User %(username)s not found."
+msgstr "Utilisateur %(username)s introuvable."
+
+#: iGottaPackage/routes.py:142
+msgid "You cannot follow yourself!"
+msgstr "Vous ne pouvez pas vous suivre vous-même!"
+
+#: iGottaPackage/routes.py:146
+#, python-format
+msgid "You are following %(username)s!"
+msgstr "Vous suivez %(username)s!"
+
+#: iGottaPackage/routes.py:158
+msgid "You cannot unfollow yourself!"
+msgstr "Vous ne pouvez pas vous déconnecter!"
+
+#: iGottaPackage/routes.py:162
+#, python-format
+msgid "You are not following %(username)s."
+msgstr "Vous ne suivez pas %(username)s."
+
+#: iGottaPackage/routes.py:176
+msgid "Check your email for the instructions to reset your password"
+msgstr ""
+"Vérifiez votre email pour les instructions pour réinitialiser votre mot "
+"de passe"
+
+#: iGottaPackage/routes.py:179
+#: iGottaPackage/templates/reset_password_request.html:5
+msgid "Reset Password"
+msgstr "Réinitialiser le mot de passe"
+
+#: iGottaPackage/routes.py:193
+msgid "Your password has been reset."
+msgstr "Votre mot de passe a été réinitialisé."
+
+#: iGottaPackage/templates/404.html:4
+msgid "Not Found"
+msgstr "Non trouvé"
+
+#: iGottaPackage/templates/404.html:5 iGottaPackage/templates/500.html:6
+msgid "Back"
+msgstr "Retour"
+
+#: iGottaPackage/templates/500.html:4
+msgid "An unexpected error has occurred"
+msgstr "Une erreur imprévue s'est produite"
+
+#: iGottaPackage/templates/500.html:5
+msgid "The administrator has been notified. Sorry for the inconvenience!"
+msgstr "L'administrateur a été averti. Désolé pour le dérangement!"
+
+#: iGottaPackage/templates/_post.html:14
+#, python-format
+msgid "%(username)s said %(when)s"
+msgstr "%(username)s dit %(when)s"
+
+#: iGottaPackage/templates/base.html:8
+msgid "Welcome to iGotta"
+msgstr "Bienvenue à iGotta"
+
+#: iGottaPackage/templates/base.html:31
+msgid "Login"
+msgstr "Connecter"
+
+#: iGottaPackage/templates/base.html:33
+msgid "Maps"
+msgstr "Maps"
+
+#: iGottaPackage/templates/base.html:34
+msgid "Profile"
+msgstr "Profil"
+
+#: iGottaPackage/templates/base.html:35
+msgid "Logout"
+msgstr "Déconnecter"
+
+#: iGottaPackage/templates/index.html:5
+#, python-format
+msgid "Hi, %(username)s!"
+msgstr "Salut, %(username)s!"
+
+#: iGottaPackage/templates/index.html:17 iGottaPackage/templates/user.html:32
+msgid "Newer posts"
+msgstr "Articles plus récents"
+
+#: iGottaPackage/templates/index.html:22 iGottaPackage/templates/user.html:37
+msgid "Older posts"
+msgstr "Articles plus anciens"
+
+#: iGottaPackage/templates/login.html:13
+msgid "New User?"
+msgstr "Nouvel Utilisateur?"
+
+#: iGottaPackage/templates/login.html:13
+msgid "Click to Register!"
+msgstr "Cliquez pour vous inscrire!"
+
+#: iGottaPackage/templates/login.html:15
+msgid "Forgot Your Password?"
+msgstr "Mot De Passe Oublié?"
+
+#: iGottaPackage/templates/login.html:16
+msgid "Click to Reset It"
+msgstr "Cliquez pour réinitialiser"
+
+#: iGottaPackage/templates/reset_password.html:5
+msgid "Reset Your Password"
+msgstr "Réinitialiser le mot de passe"
+
+#: iGottaPackage/templates/user.html:7
+msgid "Manage your profile picture using "
+msgstr "Gérez votre photo de profil en utilisant "
+
+#: iGottaPackage/templates/user.html:9
+msgid "User"
+msgstr "Utilisateur"
+
+#: iGottaPackage/templates/user.html:12
+msgid "Last on"
+msgstr "Dernière sur"
+
+#: iGottaPackage/templates/user.html:14
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d disciples"
+
+#: iGottaPackage/templates/user.html:14
+#, python-format
+msgid "%(count)d following"
+msgstr "%(count)d suivant"
+
+#: iGottaPackage/templates/user.html:16
+msgid "Edit your profile"
+msgstr "Modifier votre profil"
+
+#: iGottaPackage/templates/user.html:18
+msgid "Follow"
+msgstr "Suivre"
+
+#: iGottaPackage/templates/user.html:20
+msgid "Unfollow"
+msgstr "Désabonner"
+

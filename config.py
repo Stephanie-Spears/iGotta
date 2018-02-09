@@ -12,17 +12,16 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('PRODUCTION_DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    MAIL_SERVER = os.environ.get('GMAIL_SERVER')
+    MAIL_PORT = int(os.environ.get('MAIL_PORT_TLS') or 25)
+    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
+    MAIL_USERNAME = os.environ.get('GMAIL_USERNAME_ONE_ONE')
+    MAIL_PASSWORD = os.environ.get('GMAIL_ONE_ONE_APP_PASSWORD')
+    ADMINS = [os.environ.get('GMAIL_USERNAME_ONE_ONE')]
+
+    LANGUAGES = ['en', 'es', 'ja', 'de', 'ru', 'fr']
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-    GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
 
-    #file uploading
-    UPLOADS_DEFAULT_DEST = basedir + str(os.environ.get('UPLOADS_DEFAULT_DEST'))
-    UPLOADS_DEFAULT_URL = os.environ.get('UPLOADS_DEFAULT_URL')
-    UPLOADED_IMAGES_DEST = basedir + str(os.environ.get('UPLOADS_IMAGES_DEST'))
-    UPLOADED_IMAGES_URL = os.environ.get('UPLOADED_IMAGES_URL')
+    POSTS_PER_PAGE = 10
 
-    #file storage
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    S3_BUCKET = os.environ.get('S3_BUCKET')

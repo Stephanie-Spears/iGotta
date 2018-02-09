@@ -1,9 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField, FileField
-from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Optional, Length
-from iGottaPackage.models import User, Post, Bathroom
-from flask_wtf.file import FileField, FileAllowed, FileRequired
-from iGottaPackage import images
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
+from iGottaPackage.models import User
+from flask_babel import _, lazy_gettext as _l
 
 
 class LoginForm(FlaskForm):
@@ -31,18 +30,33 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 
-class AddBathroomForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    body = TextAreaField('Description', validators=[Length(min=0, max=280)])
-    bathroom_picture = FileField('Bathroom Picture', validators=[FileRequired(), FileAllowed(images, 'Images only!')])
-    lat = FloatField('latitude', validators=[DataRequired()])
-    lng = FloatField('longitude', validators=[DataRequired()])
-    submit = SubmitField('Add it')
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
+    submit = SubmitField(_l('Request Password Reset'))
 
-    def validate_location(self, lat, lng):
-        lat = Bathroom.query.filter_by(lat=lat.data).first()
-        lng = Bathroom.query.filter_by(lng=lng.data).first()
-        if (lat is not None) and (lng is not None):
-            raise ValidationError('This location has already been registered.')
 
-# validate photo properties?
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField(_l('Password'), validators=[DataRequired()])
+    password2 = PasswordField(_l('Repeat Password'), validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField(_l('Request Password Reset'))
+
+
+class EditProfileForm(FlaskForm):
+    username = StringField(_l('Username'), validators=[DataRequired()])
+    about_me = TextAreaField(_l('About me'), validators=[Length(min=0, max=140)])
+    submit = SubmitField(_l('Submit'))
+
+    def __init__(self, original_username, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.original_username = original_username
+
+    def validate_username(self, username):
+        if username.data != self.original_username:
+            user = User.query.filter_by(username=self.username.data).first()
+            if user is not None:
+                raise ValidationError(_('Please use a different username.'))
+
+
+class PostForm(FlaskForm):
+    post = TextAreaField(_l('Say something'), validators=[DataRequired()])
+    submit = SubmitField(_l('Submit'))
