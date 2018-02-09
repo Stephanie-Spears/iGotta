@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, flash, request
-from iGottaPackage import app, db
+from iGottaPackage import app, db, images
 from iGottaPackage.forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
 from iGottaPackage.models import User, Post, Bathroom
@@ -9,7 +9,9 @@ from datetime import datetime
 from flask_googlemaps import GoogleMaps, Map
 from werkzeug.utils import secure_filename
 
-
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static', 'images'),                               'favicon.ico', mimetype='image/png')
 
 @app.before_request
 def before_request():
@@ -55,28 +57,16 @@ def login():
 @app.route('/index')
 @login_required
 def index():
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', title='Home', posts=posts)
+    bathrooms = Bathroom.query.all()
+    return render_template('index.html', title='Home', bathrooms=bathrooms)
 
 
 @app.route('/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'title': 'test title 1', 'body': 'Test post #1', 'address': 'Test addresss #1'},
-        {'author': user, 'title': 'test title 2', 'body': 'Test post #2', 'address': 'Test address #2'},
-    ]
-    return render_template('user.html', user=user, posts=posts)
+    bathrooms = Bathroom.query.all()
+    return render_template('user.html', user=user, bathrooms=bathrooms)
 
 
 
@@ -96,7 +86,7 @@ def maps():
         lng=-122.632595,
         style="height:100%; width:100%;",
         # maptype_control=True,
-        markers=[{'lat': b.lat, 'lng': b.lng, 'infobox': b.set_infobox(b.title, b.picture, b.body),                'icon': 'static/img/toilet-icon.png'} for b in bathrooms])
+        markers=[{'lat': b.lat, 'lng': b.lng, 'infobox': b.set_infobox(b.title, b.image_url, b.body), 'icon': 'static/img/toilet-icon.png'} for b in bathrooms])
     return render_template('maps.html', mymap=mymap,)
 
     # 'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
@@ -104,14 +94,17 @@ def maps():
             #      {'lat': 45.502556, 'lng': 122.632595, 'infobox': 'test infobox', 'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'}])
 
 
-@login_required
 @app.route('/add_bathroom', methods=['GET', 'POST'])
+@login_required
 def add_bathroom():
     form = AddBathroomForm()
     if request.method == 'GET':
         return render_template('add_bathroom.html', form=form)
     if form.validate_on_submit():
-        bathroom = Bathroom(title=form.title.data, body=form.body.data, lat=form.lat.data, lng=form.lng.data, picture=form.picture.data, creator=current_user)
+        filename = images.save(request.files['bathroom_picture'])
+        url = images.url(filename)
+        bathroom = Bathroom(title=form.title.data, body=form.body.data, lat=form.lat.data, lng=form.lng.data, image_filename=filename, image_url=url, creator=current_user)
+        # bathroom = Bathroom(title=form.title.data, body=form.body.data, lat=form.lat.data, lng=form.lng.data, picture=form.bathroom_picture.data, creator=current_user)
         db.session.add(bathroom)
         db.session.commit()
         flash('Your bathroom has been added!')

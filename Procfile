@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn igotta:app
+web: flask db upgrade; gunicorn igotta:app; init: flask db init;

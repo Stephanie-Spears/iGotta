@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField, FileField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Optional, Length
 from iGottaPackage.models import User, Post, Bathroom
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from iGottaPackage import images
 
 
 class LoginForm(FlaskForm):
@@ -30,12 +32,11 @@ class RegistrationForm(FlaskForm):
 
 
 class AddBathroomForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    body = TextAreaField('Description', validators=[Length(min=0, max=280)])
+    bathroom_picture = FileField('Bathroom Picture', validators=[FileRequired(), FileAllowed(images, 'Images only!')])
     lat = FloatField('latitude', validators=[DataRequired()])
     lng = FloatField('longitude', validators=[DataRequired()])
-    title = StringField('Title', validators=[DataRequired()])
-    # picture = FileField('Picture', validators=[FileRequired()])
-    picture = FileField('Picture', validators=[Optional()])
-    body = TextAreaField('Description', validators=[Length(min=0, max=280)])
     submit = SubmitField('Add it')
 
     def validate_location(self, lat, lng):

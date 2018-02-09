@@ -9,10 +9,13 @@
                     <p>Last On: {{ user.last_on }}</p>
                 {% endif %}
             </td>
+            <td>Manage your profile picture using <a href="https://en.gravatar.com/">Gravatar</a></td>
         </tr>
     </table>
     <hr>
-    {% for post in posts %}
-        {% include '_post.html' %}
+    {% for bathroom in bathrooms %}
+        {% if bathroom.creator == current_user %}
+            {% include '_post.html' %}
+        {% endif %}
     {% endfor %}
 {% endblock %}

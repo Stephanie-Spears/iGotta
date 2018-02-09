@@ -8,6 +8,7 @@
         {% else %}
         <title>iGotta</title>
         {% endif %}
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     </head>
     <body>
         <div>
@@ -15,8 +16,8 @@
             <a href="{{ url_for('index') }}">Home</a>
             {% if current_user.is_anonymous %}
                 <a href="{{ url_for('login') }}">Login</a>
-                <a href="{{ url_for('maps') }}">Maps</a>
             {% else %}
+                <a href="{{ url_for('maps') }}">Maps</a>
                 <a href="{{ url_for('add_bathroom') }}">Add Bathroom</a>
                 <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
                 <a href="{{ url_for('logout') }}">Logout</a>
