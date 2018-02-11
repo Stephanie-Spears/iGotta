@@ -18,7 +18,7 @@ def favicon():
 @bp.before_app_request
 def before_request():
     if current_user.is_authenticated:
-        current_user.last_seen = datetime.utcnow()
+        current_user.last_on = datetime.utcnow()
         db.session.commit()
     g.locale = str(get_locale())
 
