@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-10 22:16-0800\n"
+"POT-Creation-Date: 2018-02-11 04:49-0800\n"
 "PO-Revision-Date: 2018-02-09 05:14-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,132 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: iGottaPackage/__init__.py:21
+#: iGottaPackage/__init__.py:18
 msgid "Please log in to access this page."
 msgstr "登録されている会員はログインして下さい。"
-
-#: iGottaPackage/email.py:22
-msgid "[iGotta] Reset Your Password"
-msgstr "[iGotta]パスワードをリセットする"
-
-#: iGottaPackage/forms.py:9 iGottaPackage/forms.py:16 iGottaPackage/forms.py:45
-msgid "Username"
-msgstr "ユーザー名"
-
-#: iGottaPackage/forms.py:10 iGottaPackage/forms.py:18
-#: iGottaPackage/forms.py:39
-msgid "Password"
-msgstr "パスワード"
-
-#: iGottaPackage/forms.py:11
-msgid "Remember Me"
-msgstr "私を覚えてますか"
-
-#: iGottaPackage/forms.py:12 iGottaPackage/routes.py:58
-#: iGottaPackage/templates/login.html:6
-msgid "Sign In"
-msgstr "サインイン"
-
-#: iGottaPackage/forms.py:17 iGottaPackage/forms.py:34
-msgid "Email"
-msgstr "メール"
-
-#: iGottaPackage/forms.py:19 iGottaPackage/forms.py:40
-msgid "Repeat Password"
-msgstr "パスワードを再入力"
-
-#: iGottaPackage/forms.py:20 iGottaPackage/routes.py:40
-#: iGottaPackage/templates/register.html:5
-msgid "Register"
-msgstr "登録"
-
-#: iGottaPackage/forms.py:25 iGottaPackage/forms.py:57
-msgid "Please use a different username."
-msgstr "すでに使われています。別のIDを入力してください。"
-
-#: iGottaPackage/forms.py:30
-msgid "Please use a different email address."
-msgstr "別のメールアドレスを使用してください。"
-
-#: iGottaPackage/forms.py:35 iGottaPackage/forms.py:41
-msgid "Request Password Reset"
-msgstr "リクエストパスワードのリセット"
-
-#: iGottaPackage/forms.py:46
-msgid "About me"
-msgstr "私について"
-
-#: iGottaPackage/forms.py:47 iGottaPackage/forms.py:62
-msgid "Submit"
-msgstr "送信"
-
-#: iGottaPackage/forms.py:61
-msgid "Say something"
-msgstr "何を言う..."
-
-#: iGottaPackage/routes.py:38
-msgid "Congratulations, you are now registered with iGotta!"
-msgstr "おめでとう、あなたは今iGottaに登録されています！"
-
-#: iGottaPackage/routes.py:51
-msgid "Invalid username or password"
-msgstr "ユーザー名またはパスワードが無効です。"
-
-#: iGottaPackage/routes.py:73
-msgid "Your post is now live!"
-msgstr "あなたの投稿は現在ライブです！"
-
-#: iGottaPackage/routes.py:82 iGottaPackage/templates/base.html:30
-msgid "Home"
-msgstr "ホーム"
-
-#: iGottaPackage/routes.py:103 iGottaPackage/templates/base.html:31
-msgid "Explore"
-msgstr "探ります"
-
-#: iGottaPackage/routes.py:136
-msgid "Your changes have been saved."
-msgstr "変更を保存しました。"
-
-#: iGottaPackage/routes.py:141 iGottaPackage/templates/edit_profile.html:5
-msgid "Edit Profile"
-msgstr "プロフィールを編集"
-
-#: iGottaPackage/routes.py:149 iGottaPackage/routes.py:165
-#, python-format
-msgid "User %(username)s not found."
-msgstr "ユーザー %(username)s が見つかりません。"
-
-#: iGottaPackage/routes.py:152
-msgid "You cannot follow yourself!"
-msgstr "自分にフォローすることはできません。"
-
-#: iGottaPackage/routes.py:156
-#, python-format
-msgid "You are following %(username)s!"
-msgstr "%(username)s にフォローします！"
-
-#: iGottaPackage/routes.py:168
-msgid "You cannot unfollow yourself!"
-msgstr "自分アンフォローすることはできません！"
-
-#: iGottaPackage/routes.py:172
-#, python-format
-msgid "You are not following %(username)s."
-msgstr "あなたは　%(username)s にフォローしません。"
-
-#: iGottaPackage/routes.py:185
-msgid "Check your email for the instructions to reset your password"
-msgstr "Eメールでパスワードをリセットする手順を確認してください"
-
-#: iGottaPackage/routes.py:187
-#: iGottaPackage/templates/reset_password_request.html:5
-msgid "Reset Password"
-msgstr "パスワードをリセット"
-
-#: iGottaPackage/routes.py:201
-msgid "Your password has been reset."
-msgstr "パスワードはリセットされました。"
 
 #: iGottaPackage/translate.py:10
 msgid "Error: the translation service is not configured."
@@ -153,21 +30,129 @@ msgstr "エラー：翻訳サービスが構成されていません。"
 msgid "Error: the translation service failed."
 msgstr "エラー：翻訳サービスが失敗しました。"
 
-#: iGottaPackage/templates/404.html:4
-msgid "Not Found"
-msgstr "見つかりませんでした。"
+#: iGottaPackage/auth/email.py:8
+msgid "[iGotta] Reset Your Password"
+msgstr "[iGotta]パスワードをリセットする"
 
-#: iGottaPackage/templates/404.html:5 iGottaPackage/templates/500.html:6
-msgid "Back"
-msgstr "戻る"
+#: iGottaPackage/auth/forms.py:9 iGottaPackage/auth/forms.py:16
+#: iGottaPackage/main/forms.py:10
+msgid "Username"
+msgstr "ユーザー名"
 
-#: iGottaPackage/templates/500.html:4
-msgid "An unexpected error has occurred"
-msgstr "予期しないエラーが発生しました"
+#: iGottaPackage/auth/forms.py:10 iGottaPackage/auth/forms.py:18
+#: iGottaPackage/auth/forms.py:39
+msgid "Password"
+msgstr "パスワード"
 
-#: iGottaPackage/templates/500.html:5
-msgid "The administrator has been notified. Sorry for the inconvenience!"
-msgstr "管理者に通知されました。ご不便おかけしてすみません！"
+#: iGottaPackage/auth/forms.py:11
+msgid "Remember Me"
+msgstr "私を覚えてますか"
+
+#: iGottaPackage/auth/forms.py:12 iGottaPackage/auth/routes.py:27
+#: iGottaPackage/templates/auth/login.html:6
+msgid "Sign In"
+msgstr "サインイン"
+
+#: iGottaPackage/auth/forms.py:17 iGottaPackage/auth/forms.py:34
+msgid "Email"
+msgstr "メール"
+
+#: iGottaPackage/auth/forms.py:19 iGottaPackage/auth/forms.py:40
+msgid "Repeat Password"
+msgstr "パスワードを再入力"
+
+#: iGottaPackage/auth/forms.py:20 iGottaPackage/auth/routes.py:48
+#: iGottaPackage/templates/auth/register.html:5
+msgid "Register"
+msgstr "登録"
+
+#: iGottaPackage/auth/forms.py:25 iGottaPackage/main/forms.py:23
+msgid "Please use a different username."
+msgstr "すでに使われています。別のIDを入力してください。"
+
+#: iGottaPackage/auth/forms.py:30
+msgid "Please use a different email address."
+msgstr "別のメールアドレスを使用してください。"
+
+#: iGottaPackage/auth/forms.py:35 iGottaPackage/auth/forms.py:41
+msgid "Request Password Reset"
+msgstr "リクエストパスワードのリセット"
+
+#: iGottaPackage/auth/routes.py:20
+msgid "Invalid username or password"
+msgstr "ユーザー名またはパスワードが無効です。"
+
+#: iGottaPackage/auth/routes.py:46
+msgid "Congratulations, you are now a registered iGotta user!"
+msgstr "おめでとう、あなたは今iGottaに登録されています！"
+
+#: iGottaPackage/auth/routes.py:60
+msgid "Check your email for the instructions to reset your password"
+msgstr "Eメールでパスワードをリセットする手順を確認してください"
+
+#: iGottaPackage/auth/routes.py:62
+#: iGottaPackage/templates/auth/reset_password_request.html:5
+msgid "Reset Password"
+msgstr "パスワードをリセット"
+
+#: iGottaPackage/auth/routes.py:76
+msgid "Your password has been reset."
+msgstr "パスワードはリセットされました。"
+
+#: iGottaPackage/main/forms.py:11
+msgid "About me"
+msgstr "私について"
+
+#: iGottaPackage/main/forms.py:13 iGottaPackage/main/forms.py:28
+msgid "Submit"
+msgstr "送信"
+
+#: iGottaPackage/main/forms.py:27
+msgid "Comment"
+msgstr "コメント"
+
+#: iGottaPackage/main/routes.py:34
+msgid "Your post is now up!"
+msgstr "あなたの投稿は今すぐアップです！"
+
+#: iGottaPackage/main/routes.py:42 iGottaPackage/templates/base.html:30
+msgid "Home"
+msgstr "ホーム"
+
+#: iGottaPackage/main/routes.py:54 iGottaPackage/templates/base.html:31
+msgid "Explore"
+msgstr "探ります"
+
+#: iGottaPackage/main/routes.py:76
+msgid "Your changes have been saved."
+msgstr "変更を保存しました。"
+
+#: iGottaPackage/main/routes.py:81 iGottaPackage/templates/edit_profile.html:5
+msgid "Edit Profile"
+msgstr "プロフィールを編集"
+
+#: iGottaPackage/main/routes.py:89 iGottaPackage/main/routes.py:105
+#, python-format
+msgid "User %(username)s not found."
+msgstr "ユーザー %(username)s が見つかりません。"
+
+#: iGottaPackage/main/routes.py:92
+msgid "You cannot follow yourself!"
+msgstr "自分にフォローすることはできません。"
+
+#: iGottaPackage/main/routes.py:96
+#, python-format
+msgid "You are following %(username)s!"
+msgstr "%(username)s にフォローします！"
+
+#: iGottaPackage/main/routes.py:108
+msgid "You cannot unfollow yourself!"
+msgstr "自分アンフォローすることはできません！"
+
+#: iGottaPackage/main/routes.py:112
+#, python-format
+msgid "You are not following %(username)s."
+msgstr "あなたは　%(username)s にフォローしません。"
 
 #: iGottaPackage/templates/_post.html:14
 #, python-format
@@ -215,26 +200,6 @@ msgstr "新しいポスト"
 msgid "Older posts"
 msgstr "古いポスト"
 
-#: iGottaPackage/templates/login.html:13
-msgid "New User?"
-msgstr "新規ユーザ？"
-
-#: iGottaPackage/templates/login.html:13
-msgid "Click to Register!"
-msgstr "クリックして登録！"
-
-#: iGottaPackage/templates/login.html:15
-msgid "Forgot Your Password?"
-msgstr "パスワードをお忘れですか？"
-
-#: iGottaPackage/templates/login.html:16
-msgid "Click to Reset It"
-msgstr "クリックしてリセットする"
-
-#: iGottaPackage/templates/reset_password.html:5
-msgid "Reset Your Password"
-msgstr "パスワードをリセットしてください"
-
 #: iGottaPackage/templates/user.html:8
 msgid "Manage your profile picture using "
 msgstr "あなたのプロフィール画像を使用して管理する"
@@ -268,4 +233,50 @@ msgstr "追随"
 #: iGottaPackage/templates/user.html:25
 msgid "Unfollow"
 msgstr "フォロー解除"
+
+#: iGottaPackage/templates/auth/login.html:13
+msgid "New User?"
+msgstr "新規ユーザ？"
+
+#: iGottaPackage/templates/auth/login.html:13
+msgid "Click to Register!"
+msgstr "クリックして登録！"
+
+#: iGottaPackage/templates/auth/login.html:15
+msgid "Forgot Your Password?"
+msgstr "パスワードをお忘れですか？"
+
+#: iGottaPackage/templates/auth/login.html:16
+msgid "Click to Reset It"
+msgstr "クリックしてリセットする"
+
+#: iGottaPackage/templates/auth/reset_password.html:5
+msgid "Reset Your Password"
+msgstr "パスワードをリセットしてください"
+
+#: iGottaPackage/templates/errors/404.html:4
+msgid "Not Found"
+msgstr "見つかりませんでした。"
+
+#: iGottaPackage/templates/errors/404.html:5
+#: iGottaPackage/templates/errors/500.html:6
+msgid "Back"
+msgstr "戻る"
+
+#: iGottaPackage/templates/errors/500.html:4
+msgid "An unexpected error has occurred"
+msgstr "予期しないエラーが発生しました"
+
+#: iGottaPackage/templates/errors/500.html:5
+msgid "The administrator has been notified. Sorry for the inconvenience!"
+msgstr "管理者に通知されました。ご不便おかけしてすみません！"
+
+#~ msgid "Say something"
+#~ msgstr "何を言う..."
+
+#~ msgid "Congratulations, you are now registered with iGotta!"
+#~ msgstr "おめでとう、あなたは今iGottaに登録されています！"
+
+#~ msgid "Your post is now live!"
+#~ msgstr "あなたの投稿は現在ライブです！"
 

@@ -1,5 +1,9 @@
-from iGottaPackage import app, db, cli
+from iGottaPackage import create_app, db, cli
 from iGottaPackage.models import User, Post
+
+
+app = create_app()
+cli.register(app)
 
 
 @app.shell_context_processor
