@@ -8,6 +8,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
     FLASK_APP = os.environ.get('FLASK_APP') or os.path.join(basedir, 'igotta.py')
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
 
     # todo: switch to production DB when deploying
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
@@ -23,8 +24,11 @@ class Config(object):
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     LANGUAGES = ['en', 'es', 'fr', 'ja', 'ru']
 
-    # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-    # GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
+    # ELASTICSEARCH_URL = os.environ.get('BONSAI_URL')
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    BONSAI_URL = os.environ.get('BONSAI_URL')
+
+    GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
 
     POSTS_PER_PAGE = 10
 

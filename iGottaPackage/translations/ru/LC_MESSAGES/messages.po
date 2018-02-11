@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-11 04:49-0800\n"
+"POT-Creation-Date: 2018-02-11 08:36-0800\n"
 "PO-Revision-Date: 2018-02-09 05:14-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: iGottaPackage/__init__.py:18
+#: iGottaPackage/__init__.py:19
 msgid "Please log in to access this page."
 msgstr "Пожалуйста, войдите, чтобы открыть эту страницу."
 
@@ -111,45 +111,49 @@ msgstr "Принять"
 msgid "Comment"
 msgstr "Комментарий"
 
-#: iGottaPackage/main/routes.py:34
+#: iGottaPackage/main/forms.py:32 iGottaPackage/main/routes.py:141
+msgid "Search"
+msgstr "Поиск"
+
+#: iGottaPackage/main/routes.py:40
 msgid "Your post is now up!"
 msgstr "Ваш пост теперь поднят!"
 
-#: iGottaPackage/main/routes.py:42 iGottaPackage/templates/base.html:30
+#: iGottaPackage/main/routes.py:48 iGottaPackage/templates/base.html:30
 msgid "Home"
 msgstr "Дом"
 
-#: iGottaPackage/main/routes.py:54 iGottaPackage/templates/base.html:31
+#: iGottaPackage/main/routes.py:60 iGottaPackage/templates/base.html:31
 msgid "Explore"
 msgstr "Попробовать"
 
-#: iGottaPackage/main/routes.py:76
+#: iGottaPackage/main/routes.py:84
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
-#: iGottaPackage/main/routes.py:81 iGottaPackage/templates/edit_profile.html:5
+#: iGottaPackage/main/routes.py:89 iGottaPackage/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "Изменить профиль"
 
-#: iGottaPackage/main/routes.py:89 iGottaPackage/main/routes.py:105
+#: iGottaPackage/main/routes.py:97 iGottaPackage/main/routes.py:113
 #, python-format
 msgid "User %(username)s not found."
 msgstr "Пользователь %(username)s не найден."
 
-#: iGottaPackage/main/routes.py:92
+#: iGottaPackage/main/routes.py:100
 msgid "You cannot follow yourself!"
 msgstr "Вы не можете следовать за собой!"
 
-#: iGottaPackage/main/routes.py:96
+#: iGottaPackage/main/routes.py:104
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "Вы следуете за %(username)s!"
 
-#: iGottaPackage/main/routes.py:108
+#: iGottaPackage/main/routes.py:116
 msgid "You cannot unfollow yourself!"
 msgstr "Вы не можете отписаться от себя!"
 
-#: iGottaPackage/main/routes.py:112
+#: iGottaPackage/main/routes.py:120
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "Вы не следуете %(username)s."
@@ -167,23 +171,23 @@ msgstr "Переведите"
 msgid "Welcome to iGotta"
 msgstr "Добро пожаловать в iGotta"
 
-#: iGottaPackage/templates/base.html:35
+#: iGottaPackage/templates/base.html:42
 msgid "Login"
 msgstr "Войти"
 
-#: iGottaPackage/templates/base.html:37
+#: iGottaPackage/templates/base.html:44
 msgid "Maps"
 msgstr "Карты"
 
-#: iGottaPackage/templates/base.html:38
+#: iGottaPackage/templates/base.html:45
 msgid "Profile"
 msgstr "Профиль"
 
-#: iGottaPackage/templates/base.html:39
+#: iGottaPackage/templates/base.html:46
 msgid "Logout"
 msgstr "Выйти"
 
-#: iGottaPackage/templates/base.html:76
+#: iGottaPackage/templates/base.html:83
 msgid "Error: Could not contact server."
 msgstr "Ошибка: не удалось связаться с сервером."
 
@@ -199,6 +203,18 @@ msgstr "Новые публикации"
 #: iGottaPackage/templates/index.html:22 iGottaPackage/templates/user.html:42
 msgid "Older posts"
 msgstr "Старые публикации"
+
+#: iGottaPackage/templates/search.html:4
+msgid "Search Results"
+msgstr "результаты поиска"
+
+#: iGottaPackage/templates/search.html:12
+msgid "Previous results"
+msgstr "Предыдущие результаты"
+
+#: iGottaPackage/templates/search.html:17
+msgid "Next results"
+msgstr "Следующие результаты"
 
 #: iGottaPackage/templates/user.html:8
 msgid "Manage your profile picture using "
