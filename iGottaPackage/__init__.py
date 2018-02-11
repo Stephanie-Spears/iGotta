@@ -1,4 +1,4 @@
-import logging
+import logging, base64, os, re
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 from flask import Flask, request, current_app
@@ -36,6 +36,25 @@ def create_app(config_class=Config):
     babel.init_app(app)
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
         if app.config['ELASTICSEARCH_URL'] else None
+
+    # # Parse the auth and host from env:
+    # bonsai = os.environ['BONSAI_URL']
+    # auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
+    # host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
+    #
+    # # Connect to cluster over SSL using auth for best security:
+    # es_header = [{
+    #     'host': host,
+    #     'port': 443,
+    #     'use_ssl': True,
+    #     'http_auth': (auth[0], auth[1])
+    # }]
+    #
+    # # Instantiate the new Elasticsearch connection:
+    # es = Elasticsearch(es_header)
+    #
+    # # Verify that Python can talk to Bonsai (optional):
+    # es.ping()
 
     from iGottaPackage.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
