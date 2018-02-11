@@ -17,7 +17,7 @@ class Config(object):
     MAIL_PORT = int(os.environ.get('MAIL_PORT_TLS') or 25)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
     MAIL_USERNAME = os.environ.get('GMAIL_USERNAME_ONE_ONE')
-    MAIL_PASSWORD = os.environ.get('GMAIL_PASSWORD_ONE_ONE')
+    MAIL_PASSWORD = os.environ.get('GMAIL_ONE_ONE_APP_PASSWORD')
     ADMINS = [os.environ.get('ADMINS')]
 
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
@@ -26,5 +26,5 @@ class Config(object):
     # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
     # GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
 
-    POSTS_PER_PAGE = 5
+    POSTS_PER_PAGE = 10
 
