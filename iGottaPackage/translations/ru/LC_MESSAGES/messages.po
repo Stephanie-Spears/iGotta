@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-09 05:35-0800\n"
+"POT-Creation-Date: 2018-02-10 22:16-0800\n"
 "PO-Revision-Date: 2018-02-09 05:14-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -26,113 +26,132 @@ msgstr "Пожалуйста, войдите, чтобы открыть эту �
 msgid "[iGotta] Reset Your Password"
 msgstr "[iGotta] Сбросить пароль"
 
-#: iGottaPackage/forms.py:34
-msgid "Email"
-msgstr "Email"
+#: iGottaPackage/forms.py:9 iGottaPackage/forms.py:16 iGottaPackage/forms.py:45
+msgid "Username"
+msgstr "Юзернейм"
 
-#: iGottaPackage/forms.py:35 iGottaPackage/forms.py:43
-msgid "Request Password Reset"
-msgstr "Сброс пароля для запроса"
-
+#: iGottaPackage/forms.py:10 iGottaPackage/forms.py:18
 #: iGottaPackage/forms.py:39
 msgid "Password"
 msgstr "Пароль"
 
-#: iGottaPackage/forms.py:41
-msgid "Repeat Password"
-msgstr "Повторение пароля"
+#: iGottaPackage/forms.py:11
+msgid "Remember Me"
+msgstr "Запомни меня"
 
-#: iGottaPackage/forms.py:47
-msgid "Username"
-msgstr "Юзернейм"
-
-#: iGottaPackage/forms.py:48
-msgid "About me"
-msgstr "Обо мне"
-
-#: iGottaPackage/forms.py:50 iGottaPackage/forms.py:65
-msgid "Submit"
-msgstr "Принять"
-
-#: iGottaPackage/forms.py:60
-msgid "Please use a different username."
-msgstr "Пожалуйста, используйте другое имя пользователя."
-
-#: iGottaPackage/forms.py:64
-msgid "Say something"
-msgstr "Поговори со мной."
-
-#: iGottaPackage/routes.py:37
-msgid "Congratulations, you are now registered with iGotta!"
-msgstr "Поздравляем, теперь вы зарегистрированы в iGotta!"
-
-#: iGottaPackage/routes.py:39 iGottaPackage/templates/register.html:5
-msgid "Register"
-msgstr "регистр"
-
-#: iGottaPackage/routes.py:50
-msgid "Invalid username or password"
-msgstr "Неправильное имя пользователя (логин) или пароль"
-
-#: iGottaPackage/routes.py:57 iGottaPackage/templates/login.html:6
+#: iGottaPackage/forms.py:12 iGottaPackage/routes.py:58
+#: iGottaPackage/templates/login.html:6
 msgid "Sign In"
 msgstr "Войти"
 
-#: iGottaPackage/routes.py:69
+#: iGottaPackage/forms.py:17 iGottaPackage/forms.py:34
+msgid "Email"
+msgstr "Email"
+
+#: iGottaPackage/forms.py:19 iGottaPackage/forms.py:40
+msgid "Repeat Password"
+msgstr "Повторение пароля"
+
+#: iGottaPackage/forms.py:20 iGottaPackage/routes.py:40
+#: iGottaPackage/templates/register.html:5
+msgid "Register"
+msgstr "регистр"
+
+#: iGottaPackage/forms.py:25 iGottaPackage/forms.py:57
+msgid "Please use a different username."
+msgstr "Пожалуйста, используйте другое имя пользователя."
+
+#: iGottaPackage/forms.py:30
+msgid "Please use a different email address."
+msgstr "Пожалуйста, используйте другой адрес электронной почты."
+
+#: iGottaPackage/forms.py:35 iGottaPackage/forms.py:41
+msgid "Request Password Reset"
+msgstr "Сброс пароля для запроса"
+
+#: iGottaPackage/forms.py:46
+msgid "About me"
+msgstr "Обо мне"
+
+#: iGottaPackage/forms.py:47 iGottaPackage/forms.py:62
+msgid "Submit"
+msgstr "Принять"
+
+#: iGottaPackage/forms.py:61
+msgid "Say something"
+msgstr "Поговори со мной."
+
+#: iGottaPackage/routes.py:38
+msgid "Congratulations, you are now registered with iGotta!"
+msgstr "Поздравляем, теперь вы зарегистрированы в iGotta!"
+
+#: iGottaPackage/routes.py:51
+msgid "Invalid username or password"
+msgstr "Неправильное имя пользователя (логин) или пароль"
+
+#: iGottaPackage/routes.py:73
 msgid "Your post is now live!"
 msgstr "Ваш пост в прямом эфире!"
 
-#: iGottaPackage/routes.py:78 iGottaPackage/templates/base.html:26
+#: iGottaPackage/routes.py:82 iGottaPackage/templates/base.html:30
 msgid "Home"
 msgstr "Дом"
 
-#: iGottaPackage/routes.py:93 iGottaPackage/templates/base.html:27
+#: iGottaPackage/routes.py:103 iGottaPackage/templates/base.html:31
 msgid "Explore"
 msgstr "Попробовать"
 
-#: iGottaPackage/routes.py:126
+#: iGottaPackage/routes.py:136
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
-#: iGottaPackage/routes.py:131 iGottaPackage/templates/edit_profile.html:5
+#: iGottaPackage/routes.py:141 iGottaPackage/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "Изменить профиль"
 
-#: iGottaPackage/routes.py:139 iGottaPackage/routes.py:155
+#: iGottaPackage/routes.py:149 iGottaPackage/routes.py:165
 #, python-format
 msgid "User %(username)s not found."
 msgstr "Пользователь %(username)s не найден."
 
-#: iGottaPackage/routes.py:142
+#: iGottaPackage/routes.py:152
 msgid "You cannot follow yourself!"
 msgstr "Вы не можете следовать за собой!"
 
-#: iGottaPackage/routes.py:146
+#: iGottaPackage/routes.py:156
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "Вы следуете за %(username)s!"
 
-#: iGottaPackage/routes.py:158
+#: iGottaPackage/routes.py:168
 msgid "You cannot unfollow yourself!"
 msgstr "Вы не можете отписаться от себя!"
 
-#: iGottaPackage/routes.py:162
+#: iGottaPackage/routes.py:172
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "Вы не следуете %(username)s."
 
-#: iGottaPackage/routes.py:176
+#: iGottaPackage/routes.py:185
 msgid "Check your email for the instructions to reset your password"
 msgstr "Проверьте свой адрес электронной почты, чтобы узнать, как сбросить пароль."
 
-#: iGottaPackage/routes.py:179
+#: iGottaPackage/routes.py:187
 #: iGottaPackage/templates/reset_password_request.html:5
 msgid "Reset Password"
 msgstr "Сброс пароля"
 
-#: iGottaPackage/routes.py:193
+#: iGottaPackage/routes.py:201
 msgid "Your password has been reset."
 msgstr "Ваш пароль был сброшен."
+
+#: iGottaPackage/translate.py:10
+msgid "Error: the translation service is not configured."
+msgstr "Ошибка: служба перевода не настроена."
+
+#: iGottaPackage/translate.py:15
+msgid "Error: the translation service failed."
+msgstr "Ошибка: служба перевода не удалась."
 
 #: iGottaPackage/templates/404.html:4
 msgid "Not Found"
@@ -155,36 +174,44 @@ msgstr "Администратор был уведомлен. Приносим �
 msgid "%(username)s said %(when)s"
 msgstr "%(username)s said %(when)s"
 
-#: iGottaPackage/templates/base.html:8
+#: iGottaPackage/templates/_post.html:21
+msgid "Translate"
+msgstr "Переведите"
+
+#: iGottaPackage/templates/base.html:12
 msgid "Welcome to iGotta"
 msgstr "Добро пожаловать в iGotta"
 
-#: iGottaPackage/templates/base.html:31
+#: iGottaPackage/templates/base.html:35
 msgid "Login"
 msgstr "Войти"
 
-#: iGottaPackage/templates/base.html:33
+#: iGottaPackage/templates/base.html:37
 msgid "Maps"
 msgstr "Карты"
 
-#: iGottaPackage/templates/base.html:34
+#: iGottaPackage/templates/base.html:38
 msgid "Profile"
 msgstr "Профиль"
 
-#: iGottaPackage/templates/base.html:35
+#: iGottaPackage/templates/base.html:39
 msgid "Logout"
 msgstr "Выйти"
+
+#: iGottaPackage/templates/base.html:76
+msgid "Error: Could not contact server."
+msgstr "Ошибка: не удалось связаться с сервером."
 
 #: iGottaPackage/templates/index.html:5
 #, python-format
 msgid "Hi, %(username)s!"
 msgstr "Привет, %(username)s!"
 
-#: iGottaPackage/templates/index.html:17 iGottaPackage/templates/user.html:32
+#: iGottaPackage/templates/index.html:17 iGottaPackage/templates/user.html:37
 msgid "Newer posts"
 msgstr "Новые публикации"
 
-#: iGottaPackage/templates/index.html:22 iGottaPackage/templates/user.html:37
+#: iGottaPackage/templates/index.html:22 iGottaPackage/templates/user.html:42
 msgid "Older posts"
 msgstr "Старые публикации"
 
@@ -208,37 +235,37 @@ msgstr "Нажмите, чтобы сбросить его"
 msgid "Reset Your Password"
 msgstr "Сбросить пароль"
 
-#: iGottaPackage/templates/user.html:7
+#: iGottaPackage/templates/user.html:8
 msgid "Manage your profile picture using "
 msgstr "Управляйте своим профилем с помощью "
 
-#: iGottaPackage/templates/user.html:9
+#: iGottaPackage/templates/user.html:12
 msgid "User"
 msgstr "Пользователь"
 
-#: iGottaPackage/templates/user.html:12
+#: iGottaPackage/templates/user.html:17
 msgid "Last on"
 msgstr "Последний раз"
 
-#: iGottaPackage/templates/user.html:14
+#: iGottaPackage/templates/user.html:19
 #, python-format
 msgid "%(count)d followers"
 msgstr "%(count)d последователей"
 
-#: iGottaPackage/templates/user.html:14
+#: iGottaPackage/templates/user.html:19
 #, python-format
 msgid "%(count)d following"
 msgstr "%(count)d количество"
 
-#: iGottaPackage/templates/user.html:16
+#: iGottaPackage/templates/user.html:21
 msgid "Edit your profile"
 msgstr "Редактировать свой профиль"
 
-#: iGottaPackage/templates/user.html:18
+#: iGottaPackage/templates/user.html:23
 msgid "Follow"
 msgstr "следить"
 
-#: iGottaPackage/templates/user.html:20
+#: iGottaPackage/templates/user.html:25
 msgid "Unfollow"
 msgstr "Отписаться"
 
