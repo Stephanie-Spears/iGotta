@@ -1,6 +1,5 @@
-import logging, base64, os, re
+import os, logging, re, base64
 from logging.handlers import SMTPHandler, RotatingFileHandler
-import os
 from flask import Flask, request, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -12,6 +11,7 @@ from flask_babel import Babel, lazy_gettext as _l
 from elasticsearch import Elasticsearch
 from config import Config
 
+
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
@@ -21,6 +21,7 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 babel = Babel()
+# es = Elasticsearch()
 
 
 def create_app(config_class=Config):
@@ -34,27 +35,36 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
-    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
-        if app.config['ELASTICSEARCH_URL'] else None
 
-    # # Parse the auth and host from env:
-    # bonsai = os.environ['BONSAI_URL']
-    # auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
-    # host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
-    #
-    # # Connect to cluster over SSL using auth for best security:
-    # es_header = [{
-    #     'host': host,
-    #     'port': 443,
-    #     'use_ssl': True,
-    #     'http_auth': (auth[0], auth[1])
-    # }]
-    #
-    # # Instantiate the new Elasticsearch connection:
-    # es = Elasticsearch(es_header)
-    #
-    # # Verify that Python can talk to Bonsai (optional):
-    # es.ping()
+    if app.config['BONSAI_URL']:
+        # Log transport details (optional):
+        logging.basicConfig(level=logging.INFO)
+
+        # Parse the auth and host from env:
+        bonsai = os.environ['BONSAI_URL']
+        auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
+        host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
+        app.elasticsearch = Elasticsearch([app.config['BONSAI_URL']])
+
+        # Connect to cluster over SSL using auth for best security:
+        es_header = [{
+            'host': host,
+            'port': 443,
+            'use_ssl': True,
+            'http_auth': (auth[0], auth[1])
+        }]
+        # Instantiate the new Elasticsearch connection:
+        es = Elasticsearch(es_header)
+
+        # Verify that Python can talk to Bonsai (optional):
+        es.ping()
+    else:
+        app.elasticsearch = None
+
+    # if app.config['ELASTICSEARCH_URL']:
+    #     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
+    # else:
+    #     app.elasticsearch = None
 
     from iGottaPackage.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
