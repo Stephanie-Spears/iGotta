@@ -21,7 +21,6 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 babel = Babel()
-# es = Elasticsearch()
 
 
 def create_app(config_class=Config):
@@ -35,36 +34,8 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
-
-    if app.config['BONSAI_URL']:
-        # Log transport details (optional):
-        logging.basicConfig(level=logging.INFO)
-
-        # Parse the auth and host from env:
-        bonsai = os.environ['BONSAI_URL']
-        auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
-        host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
-        app.elasticsearch = Elasticsearch([app.config['BONSAI_URL']])
-
-        # Connect to cluster over SSL using auth for best security:
-        es_header = [{
-            'host': host,
-            'port': 443,
-            'use_ssl': True,
-            'http_auth': (auth[0], auth[1])
-        }]
-        # Instantiate the new Elasticsearch connection:
-        es = Elasticsearch(es_header)
-
-        # Verify that Python can talk to Bonsai (optional):
-        es.ping()
-    else:
-        app.elasticsearch = None
-
-    # if app.config['ELASTICSEARCH_URL']:
-    #     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
-    # else:
-    #     app.elasticsearch = None
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
+        if app.config['ELASTICSEARCH_URL'] else None
 
     from iGottaPackage.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
@@ -92,19 +63,15 @@ def create_app(config_class=Config):
             mail_handler.setLevel(logging.ERROR)
             app.logger.addHandler(mail_handler)
 
-        if app.config['LOG_TO_STDOUT']:
-            stream_handler = logging.StreamHandler()
-            stream_handler.setLevel(logging.INFO)
-            app.logger.addHandler(stream_handler)
-        else:
-            if not os.path.exists('logs'):
-                os.mkdir('logs')
-            file_handler = RotatingFileHandler('logs/igotta.log', maxBytes=10240, backupCount=10)
-            file_handler.setFormatter(logging.Formatter(
-                '%(asctime)s %(levelname)s: %(message)s '
-                '[in %(pathname)s:%(lineno)d]'))
-            file_handler.setLevel(logging.INFO)
-            app.logger.addHandler(file_handler)
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
+        file_handler = RotatingFileHandler('logs/igotta.log',
+                                           maxBytes=10240, backupCount=10)
+        file_handler.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s: %(message)s '
+            '[in %(pathname)s:%(lineno)d]'))
+        file_handler.setLevel(logging.INFO)
+        app.logger.addHandler(file_handler)
 
         app.logger.setLevel(logging.INFO)
         app.logger.info('iGotta startup')

@@ -1,5 +1,4 @@
-import os, re, logging, base64
-from elasticsearch import Elasticsearch
+import os
 from dotenv import load_dotenv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -25,7 +24,7 @@ class Config(object):
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     LANGUAGES = ['en', 'es', 'fr', 'ja', 'ru']
 
-    # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
 
     GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
 
@@ -33,4 +32,6 @@ class Config(object):
 
     #
     #
-    BONSAI_URL = os.environ.get('BONSAI_URL')
+    # BONSAI_URL = os.environ.get('BONSAI_URL')
+    # BONSAI_ACCESS_SECRET = os.environ.get('BONSAI_ACCESS_SECRET')
+    # BONSAI_ACCESS_KEY = os.environ.get('BONSAI_ACCESS_KEY')
