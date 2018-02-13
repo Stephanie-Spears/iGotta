@@ -8,6 +8,7 @@ from iGottaPackage.main.forms import EditProfileForm, PostForm, SearchForm
 from iGottaPackage.models import User, Post
 from iGottaPackage.translate import translate
 from iGottaPackage.main import bp
+import enchant
 
 
 @bp.route('/favicon.ico')
@@ -31,8 +32,11 @@ def index():
     form = PostForm()
     if form.validate_on_submit():
         language = guess_language(form.post.data)
-        if language == 'UNKNOWN' or len(language) > 5:
+        d = enchant.Dict("en_US")
+        if d.check(form.post.data):
             language = 'en'
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
         post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
