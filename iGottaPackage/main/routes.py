@@ -35,8 +35,8 @@ def index():
         # d = enchant.Dict("en_US")
         # if d.check(form.post.data):
         #     language = 'en'
-        # if language == 'UNKNOWN' or len(language) > 5:
-        #     language = ''
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
         post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
