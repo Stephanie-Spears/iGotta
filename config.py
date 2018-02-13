@@ -10,8 +10,8 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY')
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
 
-    # todo: switch to production DB when deploying
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    # todo: switch to production (env var AND filename -> production-app.db)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'production_app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     MAIL_SERVER = os.environ.get('GMAIL_SERVER')
