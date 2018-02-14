@@ -1,14 +1,15 @@
 from datetime import datetime
+
 from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app, send_from_directory
-from flask_login import current_user, login_required
 from flask_babel import _, get_locale
+from flask_login import current_user, login_required
 from guess_language import guess_language
+
 from iGottaPackage import db
+from iGottaPackage.main import bp
 from iGottaPackage.main.forms import EditProfileForm, PostForm, SearchForm
 from iGottaPackage.models import User, Post
 from iGottaPackage.translate import translate
-from iGottaPackage.main import bp
-# import enchant
 
 
 @bp.route('/favicon.ico')
@@ -32,9 +33,6 @@ def index():
     form = PostForm()
     if form.validate_on_submit():
         language = guess_language(form.post.data)
-        # d = enchant.Dict("en_US")
-        # if d.check(form.post.data):
-        #     language = 'en'
         if language == 'UNKNOWN' or len(language) > 5:
             language = ''
         post = Post(body=form.post.data, author=current_user, language=language)
