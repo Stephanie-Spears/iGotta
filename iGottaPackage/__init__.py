@@ -1,5 +1,6 @@
 import logging
-import os, re
+import os
+import re
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
 from elasticsearch import Elasticsearch
