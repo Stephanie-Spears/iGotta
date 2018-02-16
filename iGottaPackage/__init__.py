@@ -1,14 +1,17 @@
-import os, logging, re, base64
+import logging
+import os, re
 from logging.handlers import SMTPHandler, RotatingFileHandler
+
+from elasticsearch import Elasticsearch
 from flask import Flask, request, current_app
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_babel import Babel, lazy_gettext as _l
+from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_bootstrap import Bootstrap
+from flask_migrate import Migrate
 from flask_moment import Moment
-from flask_babel import Babel, lazy_gettext as _l
-from elasticsearch import Elasticsearch
+from flask_sqlalchemy import SQLAlchemy
+
 from config import Config
 
 
@@ -34,8 +37,25 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
-    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
-        if app.config['ELASTICSEARCH_URL'] else None
+    # if app.config['ELASTICSEARCH_URL']:
+    #     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
+    # else:
+    #     app.elasticsearch = None
+
+    bonsai = os.environ['BONSAI_URL']
+    auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
+    host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
+
+    es_header = [{
+        'host': host,
+        'port': 443,
+        'use_ssl': True,
+        'http_auth': (auth[0], auth[1])
+    }]
+
+    # es = Elasticsearch(es_header)
+    app.elasticsearch = Elasticsearch(es_header)
+
 
     from iGottaPackage.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
