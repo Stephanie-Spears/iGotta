@@ -37,23 +37,23 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
-    if app.config['ELASTICSEARCH_URL']:
-        app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
-    else:
-        app.elasticsearch = None
+    # if app.config['ELASTICSEARCH_URL']:
+    #     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
+    # else:
+    #     app.elasticsearch = None
 
-    # if app.debug:
-    #     bonsai = os.environ['BONSAI_URL']
-    #     auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
-    #     host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
-    #     es_header = [{
-    #         'host': host,
-    #         'port': 443,
-    #         'use_ssl': True,
-    #         'http_auth': (auth[0], auth[1])
-    #     }]
-    #     # es = Elasticsearch(es_header)
-    #     app.elasticsearch = Elasticsearch(es_header)
+    if not app.debug:
+        bonsai = os.environ['BONSAI_URL']
+        auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
+        host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
+        es_header = [{
+            'host': host,
+            'port': 443,
+            'use_ssl': True,
+            'http_auth': (auth[0], auth[1])
+        }]
+        # es = Elasticsearch(es_header)
+        app.elasticsearch = Elasticsearch(es_header)
 
     from iGottaPackage.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
