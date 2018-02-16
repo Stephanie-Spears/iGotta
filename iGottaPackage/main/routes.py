@@ -134,7 +134,7 @@ def translate_text():
     return jsonify({'text': translate(request.form['text'], request.form['source_language'], request.form['dest_language'])})
 
 
-@bp.route('/search', methods=['POST'])
+@bp.route('/search')
 @login_required
 def search():
     if not g.search_form.validate():
