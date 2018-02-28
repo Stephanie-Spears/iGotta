@@ -14,7 +14,7 @@
                     <p>{{ user.about_me }}</p>
                 {% endif %}
                 {% if user.last_on %}
-                    <p>{{ _('Last on') }}: {{ moment(user.last_on).format('LLL') }}</p>
+                    <p>{{ _('Last Online') }}: {{ moment(user.last_on).format('LLL') }}</p>
                 {% endif %}
                 <p>{{ _('%(count)d followers', count=user.followers.count()) }}, {{ _('%(count)d following', count=user.followed.count()) }}</p>
                 {% if user == current_user %}

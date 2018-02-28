@@ -26,6 +26,7 @@ def before_request():
     g.locale = str(get_locale())
 
 
+# TODO: update pyenchant/enchant to dismiss unlikely langauges
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
@@ -33,9 +34,9 @@ def index():
     form = PostForm()
     if form.validate_on_submit():
         language = guess_language(form.post.data)
-        if language == 'sk':
+        if language == 'sk' or language == 'af':
             language = 'en'
-        if language == 'pt':
+        if language == 'pt' or language == 'eo':
             language = 'es'
         if language == 'bg':
             language = 'ru'

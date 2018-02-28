@@ -43,6 +43,7 @@ def create_app(config_class=Config):
     # else:
     #     app.elasticsearch = None
 
+# TODO: update post index so it displays search results in chronological order
     if not app.debug:
         bonsai = os.environ['BONSAI_URL']
         auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
@@ -53,7 +54,6 @@ def create_app(config_class=Config):
             'use_ssl': True,
             'http_auth': (auth[0], auth[1])
         }]
-        # es = Elasticsearch(es_header)
         app.elasticsearch = Elasticsearch(es_header)
 
     from iGottaPackage.errors import bp as errors_bp
