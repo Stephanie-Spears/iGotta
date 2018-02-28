@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app, send_from_directory
 from flask_babel import _, get_locale
 from flask_login import current_user, login_required
-from guess_language import guess_language
+from langdetect import detect
 
 from iGottaPackage import db
 from iGottaPackage.main import bp
@@ -33,13 +33,8 @@ def before_request():
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        language = guess_language(form.post.data)
-        if language == 'sk' or language == 'af':
-            language = 'en'
-        if language == 'pt' or language == 'eo':
-            language = 'es'
-        if language == 'bg':
-            language = 'ru'
+        # language = guess_language(form.post.data)
+        language = detect(form.post.data)
         if language == 'UNKNOWN' or len(language) > 5:
             language = ''
         post = Post(body=form.post.data, author=current_user, language=language)
