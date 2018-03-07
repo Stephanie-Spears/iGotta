@@ -1,12 +1,19 @@
 from datetime import datetime
 from hashlib import md5
 from time import time
+
+import jwt
 from flask import current_app
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-import jwt
+
 from iGottaPackage import db, login
 from iGottaPackage.search import add_to_index, remove_from_index, query_index
+
+# from flask.ext.sqlalchemy import SQLAlchemy, BaseQuery
+# from sqlalchemy_searchable import SearchQueryMixin
+# from sqlalchemy_utils.types import TSVectorType
+# from sqlalchemy_searchable import make_searchable
 
 
 class SearchableMixin(object):
@@ -133,3 +140,62 @@ class Post(SearchableMixin, db.Model):
 
 db.event.listen(db.session, 'before_commit', Post.before_commit)
 db.event.listen(db.session, 'after_commit', Post.after_commit)
+
+
+# class Bathroom():
+# class ArticleQuery(db.Model, SearchQueryMixin):
+#     pass
+
+
+
+
+
+
+# DATABASE MODEL:
+#
+# app = Flask(__name__)
+# csrf = CsrfProtect(app)
+# csrf.init_app(app)
+#
+# db = SQLAlchemy(app)
+#
+# class ArticleQuery(BaseQuery, SearchQueryMixin):
+#     pass
+#
+#
+# class latest_movies_scraper(db.Model):
+#     query_class = ArticleQuery
+#     __tablename__ = 'latest_movies_scraper'
+#     id = db.Column(sa.Integer, primary_key=True)
+#     name = db.Column(db.Unicode(255))
+#     url = db.Column(db.Unicode(255))
+#     image_url = db.Column(db.Unicode(255))
+#     create = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+#     search_vector = db.Column(TSVectorType('name'))
+# How i'm saving to database:
+#
+# check_if_exists = latest_movies_scraper.query.filter_by(name=dictionary['title']).first()
+#
+#                     if check_if_exists:
+#                         print check_if_exists.name
+#                         print 'skipping this...'
+#                         pass
+#                     else:
+#
+#                         insert_to_db = latest_movies_scraper(name=dictionary['title'], url=dictionary['href'], image_url=dictionary['featured_image'])
+#                         db.session.add(insert_to_db)
+#                         db.session.commit()
+# How I am using search capbilitiy functionality:
+#
+# name = latest_movies_scraper.query.search(u'Black Panther (2018)').limit(5).all()
+# Name returns empty array, but it should return me the name list instead
+
+
+
+# SQLAlchemy-Searchable doesn't index existing data. This has to be done manually by performing a synchronisation. For the table definition above the code below is sufficient:
+#
+# from sqlalchemy_searchable import sync_trigger
+#
+# def sync_fts():
+#     sync_trigger(db.engine, 'latest_movies_scraper', 'search_vector', ['name'])
+# This code would normally be part of the db management tools (Flask-Script, Click).

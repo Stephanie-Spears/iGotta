@@ -1,21 +1,19 @@
 #!/usr/bin/env python
+from coverage import coverage
 from datetime import datetime, timedelta
 import unittest
-from iGottaPackage import create_app, db
+from iGottaPackage import create_Testing_app, db
 from iGottaPackage.models import User, Post
-from config import Config
+from config import TestingConfig, basedir
+import os
 
-
-class TestConfig(Config):
-    TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite://'
-    ELASTICSEARCH_URL = None
-    BONSAI_URL = None
+cov = coverage(branch=True, omit=['flask/*', 'tests.py', 'venv/*'])
+cov.start()
 
 
 class UserModelCase(unittest.TestCase):
     def setUp(self):
-        self.app = create_app(TestConfig)
+        self.app = create_Testing_app(TestingConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
@@ -50,9 +48,9 @@ class UserModelCase(unittest.TestCase):
         db.session.commit()
         self.assertTrue(u1.is_following(u2))
         self.assertEqual(u1.followed.count(), 1)
-        self.assertEqual(u1.followed.first().username, 'susan')
+        self.assertEqual(u1.followed.first().username, 'Susan')
         self.assertEqual(u2.followers.count(), 1)
-        self.assertEqual(u2.followers.first().username, 'john')
+        self.assertEqual(u2.followers.first().username, 'John')
 
         u1.unfollow(u2)
         db.session.commit()
@@ -98,6 +96,31 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(f3, [p3, p4])
         self.assertEqual(f4, [p4])
 
+    def test_delete_post(self):
+        # create a user and a post
+        u = User(username='John', email='John@example.com')
+        p = Post(body='test post', author=u, timestamp=datetime.utcnow())
+        db.session.add(u)
+        db.session.add(p)
+        db.session.commit()
+        # query the post and destroy the session
+        p = Post.query.get(1)
+        db.session.remove()
+        # delete the post using a new session
+        db.session = db.create_scoped_session()
+        db.session.delete(p)
+        db.session.commit()
+
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    try:
+        unittest.main()
+    except:
+        pass
+    cov.stop()
+    cov.save()
+    print("\n\nCoverage Report:\n")
+    cov.report()
+    print("HTML version: " + os.path.join(basedir, "tmp/coverage/index.html"))
+    cov.html_report(directory='tmp/coverage')
+    cov.erase()

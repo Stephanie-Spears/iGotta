@@ -17,6 +17,18 @@ def favicon():
     return send_from_directory('static/img', 'favicon.ico', mimetype='image/png')
 
 
+@bp.route('/Oops404Error.png')
+@bp.route('/Oops404.png')
+def bad_request():
+    return send_from_directory('static/img', '/Oops404.png', mimetype='image/png')
+
+
+@bp.route('/Oops500Error.png')
+@bp.route('/Oops500.png')
+def bad_server():
+    return send_from_directory('static/img', '/Oops500.png', mimetype='image/png')
+
+
 @bp.before_app_request
 def before_request():
     if current_user.is_authenticated:
@@ -26,7 +38,6 @@ def before_request():
     g.locale = str(get_locale())
 
 
-# TODO: update pyenchant/enchant to dismiss unlikely langauges
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
@@ -149,6 +160,22 @@ def search():
     prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
         if page > 1 else None
     return render_template('search.html', title=_('Search'), posts=posts, next_url=next_url, prev_url=prev_url)
+
+
+@bp.route('/delete/<int:id>')
+@login_required
+def delete(id):
+    post = Post.query.get(id)
+    if post is None:
+        flash('Post not found.')
+        return redirect(url_for('index'))
+    if post.author.id != g.user.id:
+        flash('You cannot delete this post.')
+        return redirect(url_for('index'))
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted.')
+    return redirect(url_for('index'))
 
 
 @bp.route('/maps')

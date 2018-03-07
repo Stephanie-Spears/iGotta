@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-28 02:13-0800\n"
+"POT-Creation-Date: 2018-02-28 21:42-0800\n"
 "PO-Revision-Date: 2018-02-09 05:14-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -88,7 +88,9 @@ msgstr "Felicidades, ahora eres un usuario registrado de iGotta"
 
 #: iGottaPackage/auth/routes.py:60
 msgid "Check your email for the instructions to reset your password"
-msgstr "Consulte su correo electrónico para obtener las instrucciones para restablecer su contraseña"
+msgstr ""
+"Consulte su correo electrónico para obtener las instrucciones para "
+"restablecer su contraseña"
 
 #: iGottaPackage/auth/routes.py:62
 #: iGottaPackage/templates/auth/reset_password_request.html:5
@@ -111,49 +113,49 @@ msgstr "Enviar"
 msgid "Comment"
 msgstr "Comentario"
 
-#: iGottaPackage/main/forms.py:31 iGottaPackage/main/routes.py:156
+#: iGottaPackage/main/forms.py:31 iGottaPackage/main/routes.py:163
 msgid "Search"
 msgstr "Buscar"
 
-#: iGottaPackage/main/routes.py:48
+#: iGottaPackage/main/routes.py:55
 msgid "Your post is now up!"
 msgstr "¡Tu publicación ahora está activa!"
 
-#: iGottaPackage/main/routes.py:56 iGottaPackage/templates/base.html:30
+#: iGottaPackage/main/routes.py:63 iGottaPackage/templates/base.html:30
 msgid "Home"
 msgstr "Casa"
 
-#: iGottaPackage/main/routes.py:68 iGottaPackage/templates/base.html:31
+#: iGottaPackage/main/routes.py:75 iGottaPackage/templates/base.html:31
 msgid "Explore"
 msgstr "Explorar"
 
-#: iGottaPackage/main/routes.py:99
+#: iGottaPackage/main/routes.py:106
 msgid "Your changes have been saved."
 msgstr "Los cambios se han guardado."
 
-#: iGottaPackage/main/routes.py:104 iGottaPackage/templates/edit_profile.html:5
+#: iGottaPackage/main/routes.py:111 iGottaPackage/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "Editar Perfil"
 
-#: iGottaPackage/main/routes.py:112 iGottaPackage/main/routes.py:128
+#: iGottaPackage/main/routes.py:119 iGottaPackage/main/routes.py:135
 #, python-format
 msgid "User %(username)s not found."
 msgstr "Usuario %(username)s no encontrado."
 
-#: iGottaPackage/main/routes.py:115
+#: iGottaPackage/main/routes.py:122
 msgid "You cannot follow yourself!"
 msgstr "¡No puedes seguirte!"
 
-#: iGottaPackage/main/routes.py:119
+#: iGottaPackage/main/routes.py:126
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "¡Estás siguiendo %(username)s!"
 
-#: iGottaPackage/main/routes.py:131
+#: iGottaPackage/main/routes.py:138
 msgid "You cannot unfollow yourself!"
 msgstr "¡No puedes dejar de seguir!"
 
-#: iGottaPackage/main/routes.py:135
+#: iGottaPackage/main/routes.py:142
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "No estás siguiendo %(username)s."
@@ -166,6 +168,10 @@ msgstr "%(username)s (%(when)s)"
 #: iGottaPackage/templates/_post.html:27
 msgid "Translate"
 msgstr "Traducir"
+
+#: iGottaPackage/templates/_post.html:31
+msgid "Delete"
+msgstr "Borrar"
 
 #: iGottaPackage/templates/base.html:12
 msgid "Welcome to iGotta"
@@ -279,8 +285,8 @@ msgstr "Restablecer su contraseña"
 msgid "Not Found"
 msgstr "Extraviado"
 
-#: iGottaPackage/templates/errors/404.html:5
-#: iGottaPackage/templates/errors/500.html:6
+#: iGottaPackage/templates/errors/404.html:9
+#: iGottaPackage/templates/errors/500.html:12
 msgid "Back"
 msgstr "Atrás"
 
@@ -288,9 +294,11 @@ msgstr "Atrás"
 msgid "An unexpected error has occurred"
 msgstr "Ha ocurrido un error inesperado"
 
-#: iGottaPackage/templates/errors/500.html:5
+#: iGottaPackage/templates/errors/500.html:8
 msgid "The administrator has been notified. Sorry for the inconvenience!"
-msgstr "El administrador ha sido notificado. Perdone los inconvenientes ocasionados!"
+msgstr ""
+"El administrador ha sido notificado. Perdone los inconvenientes "
+"ocasionados!"
 
 #~ msgid "Say something"
 #~ msgstr "Diga algo"

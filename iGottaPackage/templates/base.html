@@ -3,6 +3,12 @@
 {% block head %}
     {{ super() }}
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+{#TODO: checkout MapBox API vs GoogleMaps#}
+{#    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>    #}
+{#<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />#}
+
+
 {% endblock %}
 
 {% block title %}

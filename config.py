@@ -1,9 +1,6 @@
-import logging
 import os
-import re
 
 from dotenv import load_dotenv
-from elasticsearch import Elasticsearch
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
@@ -11,12 +8,18 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config(object):
     FLASK_APP = os.environ.get('FLASK_APP') or os.path.join(basedir, 'igotta.py')
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
-
-    # todo: switch to production (env var AND filename -> production-app.db)
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    DEBUG = False
+    TESTING = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite://:memory:'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    LANGUAGES = ['en', 'es', 'fr', 'ja', 'ru']
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    POSTS_PER_PAGE = 10
+
+
+class ProductionConfig(Config):
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
     MAIL_SERVER = os.environ.get('GMAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT_TLS') or 25)
@@ -26,16 +29,25 @@ class Config(object):
     ADMINS = [os.environ.get('ADMINS')]
 
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
-    LANGUAGES = ['en', 'es', 'fr', 'ja', 'ru']
-
-    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-
     GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
 
-    POSTS_PER_PAGE = 10
+    BONSAI_URL = os.environ.get('BONSAI_URL')
 
-    #
-    #
-    # BONSAI_URL = os.environ.get('BONSAI_URL')
-    # BONSAI_ACCESS_SECRET = os.environ.get('BONSAI_ACCESS_SECRET')
-    # BONSAI_ACCESS_KEY = os.environ.get('BONSAI_ACCESS_KEY')
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+    FLASK_DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+    GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+
+
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    ELASTICSEARCH_URL = None
+    BONSAI_URL = None
+
+
+
