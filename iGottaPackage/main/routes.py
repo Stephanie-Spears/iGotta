@@ -12,6 +12,17 @@ from iGottaPackage.models import User, Post
 from iGottaPackage.translate import translate
 
 
+@bp.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        # TODO: g.user, check that this doesn't interfere with anything else
+        g.user = current_user
+        current_user.last_on = datetime.utcnow()
+        db.session.commit()
+        g.search_form = SearchForm()
+    g.locale = str(get_locale())
+
+
 @bp.route('/favicon.ico')
 def favicon():
     return send_from_directory('static/img', 'favicon.ico', mimetype='image/png')
@@ -27,15 +38,6 @@ def bad_request():
 @bp.route('/Oops500.png')
 def bad_server():
     return send_from_directory('static/img', '/Oops500.png', mimetype='image/png')
-
-
-@bp.before_app_request
-def before_request():
-    if current_user.is_authenticated:
-        current_user.last_on = datetime.utcnow()
-        db.session.commit()
-        g.search_form = SearchForm()
-    g.locale = str(get_locale())
 
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -168,14 +170,14 @@ def delete(id):
     post = Post.query.get(id)
     if post is None:
         flash('Post not found.')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     if post.author.id != g.user.id:
         flash('You cannot delete this post.')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted.')
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 
 @bp.route('/maps')
