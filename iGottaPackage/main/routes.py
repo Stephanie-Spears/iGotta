@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app, send_from_directory
+from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app
 from flask_babel import _, get_locale
 from flask_login import current_user, login_required
 from langdetect import detect
@@ -15,29 +15,10 @@ from iGottaPackage.translate import translate
 @bp.before_app_request
 def before_request():
     if current_user.is_authenticated:
-        # TODO: g.user, check that this doesn't interfere with anything else
-        g.user = current_user
         current_user.last_on = datetime.utcnow()
         db.session.commit()
         g.search_form = SearchForm()
     g.locale = str(get_locale())
-
-
-@bp.route('/favicon.ico')
-def favicon():
-    return send_from_directory('static/img', 'favicon.ico', mimetype='image/png')
-
-
-@bp.route('/Oops404Error.png')
-@bp.route('/Oops404.png')
-def bad_request():
-    return send_from_directory('static/img', '/Oops404.png', mimetype='image/png')
-
-
-@bp.route('/Oops500Error.png')
-@bp.route('/Oops500.png')
-def bad_server():
-    return send_from_directory('static/img', '/Oops500.png', mimetype='image/png')
 
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -46,7 +27,6 @@ def bad_server():
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        # language = guess_language(form.post.data)
         language = detect(form.post.data)
         if language == 'UNKNOWN' or len(language) > 5:
             language = ''
@@ -171,7 +151,7 @@ def delete(id):
     if post is None:
         flash('Post not found.')
         return redirect(url_for('main.index'))
-    if post.author.id != g.user.id:
+    if post.author.id != current_user.id:
         flash('You cannot delete this post.')
         return redirect(url_for('main.index'))
     db.session.delete(post)

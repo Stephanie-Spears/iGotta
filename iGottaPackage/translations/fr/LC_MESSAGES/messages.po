@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-28 21:42-0800\n"
+"POT-Creation-Date: 2018-03-12 18:44-0700\n"
 "PO-Revision-Date: 2018-02-09 05:14-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -88,9 +88,7 @@ msgstr "Félicitations, vous êtes maintenant inscrit avec iGotta!"
 
 #: iGottaPackage/auth/routes.py:60
 msgid "Check your email for the instructions to reset your password"
-msgstr ""
-"Vérifiez votre email pour les instructions pour réinitialiser votre mot "
-"de passe"
+msgstr "Vérifiez votre email pour les instructions pour réinitialiser votre mot de passe"
 
 #: iGottaPackage/auth/routes.py:62
 #: iGottaPackage/templates/auth/reset_password_request.html:5
@@ -113,49 +111,49 @@ msgstr "Envoyer"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: iGottaPackage/main/forms.py:31 iGottaPackage/main/routes.py:163
+#: iGottaPackage/main/forms.py:31 iGottaPackage/main/routes.py:144
 msgid "Search"
 msgstr "Chercher"
 
-#: iGottaPackage/main/routes.py:55
+#: iGottaPackage/main/routes.py:36
 msgid "Your post is now up!"
 msgstr "Votre message est maintenant en ligne!"
 
-#: iGottaPackage/main/routes.py:63 iGottaPackage/templates/base.html:30
+#: iGottaPackage/main/routes.py:44 iGottaPackage/templates/base.html:35
 msgid "Home"
 msgstr "Accueil"
 
-#: iGottaPackage/main/routes.py:75 iGottaPackage/templates/base.html:31
+#: iGottaPackage/main/routes.py:56 iGottaPackage/templates/base.html:36
 msgid "Explore"
 msgstr "Explorer"
 
-#: iGottaPackage/main/routes.py:106
+#: iGottaPackage/main/routes.py:87
 msgid "Your changes have been saved."
 msgstr "Vos changements ont été enregistrés."
 
-#: iGottaPackage/main/routes.py:111 iGottaPackage/templates/edit_profile.html:5
+#: iGottaPackage/main/routes.py:92 iGottaPackage/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "Editer le profil"
 
-#: iGottaPackage/main/routes.py:119 iGottaPackage/main/routes.py:135
+#: iGottaPackage/main/routes.py:100 iGottaPackage/main/routes.py:116
 #, python-format
 msgid "User %(username)s not found."
 msgstr "Utilisateur %(username)s introuvable."
 
-#: iGottaPackage/main/routes.py:122
+#: iGottaPackage/main/routes.py:103
 msgid "You cannot follow yourself!"
 msgstr "Vous ne pouvez pas vous suivre vous-même!"
 
-#: iGottaPackage/main/routes.py:126
+#: iGottaPackage/main/routes.py:107
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "Vous suivez %(username)s!"
 
-#: iGottaPackage/main/routes.py:138
+#: iGottaPackage/main/routes.py:119
 msgid "You cannot unfollow yourself!"
 msgstr "Vous ne pouvez pas vous déconnecter!"
 
-#: iGottaPackage/main/routes.py:142
+#: iGottaPackage/main/routes.py:123
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "Vous ne suivez pas %(username)s."
@@ -173,27 +171,27 @@ msgstr "Traduire"
 msgid "Delete"
 msgstr "Effacer"
 
-#: iGottaPackage/templates/base.html:12
+#: iGottaPackage/templates/base.html:17
 msgid "Welcome to iGotta"
 msgstr "Bienvenue à iGotta"
 
-#: iGottaPackage/templates/base.html:42
+#: iGottaPackage/templates/base.html:47
 msgid "Login"
 msgstr "Connecter"
 
-#: iGottaPackage/templates/base.html:44
+#: iGottaPackage/templates/base.html:49
 msgid "Maps"
 msgstr "Maps"
 
-#: iGottaPackage/templates/base.html:45
+#: iGottaPackage/templates/base.html:50
 msgid "Profile"
 msgstr "Profil"
 
-#: iGottaPackage/templates/base.html:46
+#: iGottaPackage/templates/base.html:51
 msgid "Logout"
 msgstr "Déconnecter"
 
-#: iGottaPackage/templates/base.html:83
+#: iGottaPackage/templates/base.html:88
 msgid "Error: Could not contact server."
 msgstr "Erreur: Impossible de contacter le serveur."
 
@@ -230,19 +228,19 @@ msgstr "Gérez votre photo de profil en utilisant "
 msgid "User"
 msgstr "Utilisateur"
 
-#: iGottaPackage/templates/user.html:17
-#: iGottaPackage/templates/user_popup.html:9
+#: iGottaPackage/templates/user.html:14
+#: iGottaPackage/templates/user_popup.html:8
 msgid "Last Online"
 msgstr "Dernière Ligne"
 
-#: iGottaPackage/templates/user.html:19
-#: iGottaPackage/templates/user_popup.html:11
+#: iGottaPackage/templates/user.html:16
+#: iGottaPackage/templates/user_popup.html:10
 #, python-format
 msgid "%(count)d followers"
 msgstr "%(count)d disciples"
 
-#: iGottaPackage/templates/user.html:19
-#: iGottaPackage/templates/user_popup.html:11
+#: iGottaPackage/templates/user.html:16
+#: iGottaPackage/templates/user_popup.html:10
 #, python-format
 msgid "%(count)d following"
 msgstr "%(count)d suivant"
@@ -281,22 +279,38 @@ msgstr "Cliquez pour réinitialiser"
 msgid "Reset Your Password"
 msgstr "Réinitialiser le mot de passe"
 
-#: iGottaPackage/templates/errors/404.html:4
-msgid "Not Found"
-msgstr "Non trouvé"
+#: iGottaPackage/templates/errors/404.html:5
+msgid "Page Not Found"
+msgstr "Page non trouvée"
 
-#: iGottaPackage/templates/errors/404.html:9
+#: iGottaPackage/templates/errors/404.html:6
+msgid "The page you requested does not exist."
+msgstr "La page que vous avez demandée n'existe pas."
+
+#: iGottaPackage/templates/errors/404.html:7
+msgid "...or it is taking a bathroom break."
+msgstr "...ou il prend une pause dans la salle de bain."
+
+#: iGottaPackage/templates/errors/404.html:11
 #: iGottaPackage/templates/errors/500.html:12
 msgid "Back"
 msgstr "Retour"
 
-#: iGottaPackage/templates/errors/500.html:4
-msgid "An unexpected error has occurred"
-msgstr "Une erreur imprévue s'est produite"
+#: iGottaPackage/templates/errors/500.html:5
+msgid "Internal Server Error"
+msgstr "Erreur Interne du Serveur"
+
+#: iGottaPackage/templates/errors/500.html:6
+msgid "The loo is clogged!"
+msgstr "Les toilettes sont bouchées!"
+
+#: iGottaPackage/templates/errors/500.html:7
+msgid "An unexpected error has occured."
+msgstr "Une erreur imprévue s'est produite."
 
 #: iGottaPackage/templates/errors/500.html:8
-msgid "The administrator has been notified. Sorry for the inconvenience!"
-msgstr "L'administrateur a été averti. Désolé pour le dérangement!"
+msgid "The administrator has been notified, sorry for the inconvenience!"
+msgstr "L'administrateur a été informé, désolé pour le dérangement!"
 
 #~ msgid "Say something"
 #~ msgstr "Dis quelque chose!"
@@ -309,4 +323,13 @@ msgstr "L'administrateur a été averti. Désolé pour le dérangement!"
 
 #~ msgid "%(username)s said %(when)s"
 #~ msgstr "%(username)s dit %(when)s"
+
+#~ msgid "Not Found"
+#~ msgstr "Non trouvé"
+
+#~ msgid "An unexpected error has occurred"
+#~ msgstr "Une erreur imprévue s'est produite"
+
+#~ msgid "The administrator has been notified. Sorry for the inconvenience!"
+#~ msgstr "L'administrateur a été averti. Désolé pour le dérangement!"
 

@@ -11,7 +11,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     # force an SQLite database to exist purely in memory is to open the database using the special filename ":memory:". DB ceases to exists once connection is lost
-    # SQLALCHEMY_DATABASE_URI = 'sqlite://:memory:'
+    SQLALCHEMY_DATABASE_URI = 'sqlite://:memory:'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LANGUAGES = ['en', 'es', 'fr', 'ja', 'ru']
     SECRET_KEY = os.environ.get('SECRET_KEY')

@@ -1,0 +1,6 @@
+/* ---- imports ---- */
+@import url(https://fonts.googleapis.com/css?family=Comfortaa:700);
+
+html,body{
+    font-family: Comfortaa, cursive;
+}

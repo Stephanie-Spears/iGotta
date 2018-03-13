@@ -115,7 +115,8 @@ class UserModelCase(unittest.TestCase):
 if __name__ == '__main__':
     try:
         unittest.main()
-    except:
+    except Exception as e:
+        print(str(e))
         pass
     cov.stop()
     cov.save()

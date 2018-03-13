@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>{{ _('Not Found') }}</h1>
-{#    TODO: FORMAT 404 AND 500 Images #}
-    <div><img src="{{ url_for('static', filename='img/Oops404.png') }}" alt=""></div>
-    <div><img src="{{ url_for('static', filename='img/Oops404Error.png') }}" alt=""></div>
+    <div class="errorpage text-center">
+        <h1>404<br>{{ _('Page Not Found') }}</h1>
+        <p>{{ _('The page you requested does not exist.') }}</p>
+        <p>{{ _('...or it is taking a bathroom break.') }}</p>
+        <img src="{{ url_for('static', filename='img/404.png') }}" alt="">
+    </div>
 
-    <p><a href="{{ url_for('main.index') }}">{{ _('Back') }}</a></p>
+    <button class="btn btn-default"><a href="{{ url_for('main.index') }}">{{ _('Back') }}</a></button>
+
 {% endblock %}

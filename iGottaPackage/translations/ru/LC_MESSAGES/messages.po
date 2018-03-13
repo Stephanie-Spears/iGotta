@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-28 21:42-0800\n"
+"POT-Creation-Date: 2018-03-12 18:44-0700\n"
 "PO-Revision-Date: 2018-02-09 05:14-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -111,49 +111,49 @@ msgstr "Принять"
 msgid "Comment"
 msgstr "Комментарий"
 
-#: iGottaPackage/main/forms.py:31 iGottaPackage/main/routes.py:163
+#: iGottaPackage/main/forms.py:31 iGottaPackage/main/routes.py:144
 msgid "Search"
 msgstr "Поиск"
 
-#: iGottaPackage/main/routes.py:55
+#: iGottaPackage/main/routes.py:36
 msgid "Your post is now up!"
 msgstr "Ваш пост теперь поднят!"
 
-#: iGottaPackage/main/routes.py:63 iGottaPackage/templates/base.html:30
+#: iGottaPackage/main/routes.py:44 iGottaPackage/templates/base.html:35
 msgid "Home"
 msgstr "Дом"
 
-#: iGottaPackage/main/routes.py:75 iGottaPackage/templates/base.html:31
+#: iGottaPackage/main/routes.py:56 iGottaPackage/templates/base.html:36
 msgid "Explore"
 msgstr "Попробовать"
 
-#: iGottaPackage/main/routes.py:106
+#: iGottaPackage/main/routes.py:87
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
-#: iGottaPackage/main/routes.py:111 iGottaPackage/templates/edit_profile.html:5
+#: iGottaPackage/main/routes.py:92 iGottaPackage/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "Изменить профиль"
 
-#: iGottaPackage/main/routes.py:119 iGottaPackage/main/routes.py:135
+#: iGottaPackage/main/routes.py:100 iGottaPackage/main/routes.py:116
 #, python-format
 msgid "User %(username)s not found."
 msgstr "Пользователь %(username)s не найден."
 
-#: iGottaPackage/main/routes.py:122
+#: iGottaPackage/main/routes.py:103
 msgid "You cannot follow yourself!"
 msgstr "Вы не можете следовать за собой!"
 
-#: iGottaPackage/main/routes.py:126
+#: iGottaPackage/main/routes.py:107
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "Вы следуете за %(username)s!"
 
-#: iGottaPackage/main/routes.py:138
+#: iGottaPackage/main/routes.py:119
 msgid "You cannot unfollow yourself!"
 msgstr "Вы не можете отписаться от себя!"
 
-#: iGottaPackage/main/routes.py:142
+#: iGottaPackage/main/routes.py:123
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "Вы не следуете %(username)s."
@@ -171,27 +171,27 @@ msgstr "Переведите"
 msgid "Delete"
 msgstr "Удалить"
 
-#: iGottaPackage/templates/base.html:12
+#: iGottaPackage/templates/base.html:17
 msgid "Welcome to iGotta"
 msgstr "Добро пожаловать в iGotta"
 
-#: iGottaPackage/templates/base.html:42
+#: iGottaPackage/templates/base.html:47
 msgid "Login"
 msgstr "Войти"
 
-#: iGottaPackage/templates/base.html:44
+#: iGottaPackage/templates/base.html:49
 msgid "Maps"
 msgstr "Карты"
 
-#: iGottaPackage/templates/base.html:45
+#: iGottaPackage/templates/base.html:50
 msgid "Profile"
 msgstr "Профиль"
 
-#: iGottaPackage/templates/base.html:46
+#: iGottaPackage/templates/base.html:51
 msgid "Logout"
 msgstr "Выйти"
 
-#: iGottaPackage/templates/base.html:83
+#: iGottaPackage/templates/base.html:88
 msgid "Error: Could not contact server."
 msgstr "Ошибка: не удалось связаться с сервером."
 
@@ -228,19 +228,19 @@ msgstr "Управляйте своим профилем с помощью "
 msgid "User"
 msgstr "Пользователь"
 
-#: iGottaPackage/templates/user.html:17
-#: iGottaPackage/templates/user_popup.html:9
+#: iGottaPackage/templates/user.html:14
+#: iGottaPackage/templates/user_popup.html:8
 msgid "Last Online"
 msgstr "Последняя активность"
 
-#: iGottaPackage/templates/user.html:19
-#: iGottaPackage/templates/user_popup.html:11
+#: iGottaPackage/templates/user.html:16
+#: iGottaPackage/templates/user_popup.html:10
 #, python-format
 msgid "%(count)d followers"
 msgstr "%(count)d последователей"
 
-#: iGottaPackage/templates/user.html:19
-#: iGottaPackage/templates/user_popup.html:11
+#: iGottaPackage/templates/user.html:16
+#: iGottaPackage/templates/user_popup.html:10
 #, python-format
 msgid "%(count)d following"
 msgstr "%(count)d количество"
@@ -279,22 +279,38 @@ msgstr "Нажмите, чтобы сбросить его"
 msgid "Reset Your Password"
 msgstr "Сбросить пароль"
 
-#: iGottaPackage/templates/errors/404.html:4
-msgid "Not Found"
-msgstr "Не найдено"
+#: iGottaPackage/templates/errors/404.html:5
+msgid "Page Not Found"
+msgstr "Страница не найдена"
 
-#: iGottaPackage/templates/errors/404.html:9
+#: iGottaPackage/templates/errors/404.html:6
+msgid "The page you requested does not exist."
+msgstr "Запрошенная вами страница не существует."
+
+#: iGottaPackage/templates/errors/404.html:7
+msgid "...or it is taking a bathroom break."
+msgstr "...или это перерыв в ванной."
+
+#: iGottaPackage/templates/errors/404.html:11
 #: iGottaPackage/templates/errors/500.html:12
 msgid "Back"
 msgstr "назад"
 
-#: iGottaPackage/templates/errors/500.html:4
-msgid "An unexpected error has occurred"
-msgstr "произошла неожиданная ошибка"
+#: iGottaPackage/templates/errors/500.html:5
+msgid "Internal Server Error"
+msgstr "Внутренняя ошибка сервера"
+
+#: iGottaPackage/templates/errors/500.html:6
+msgid "The loo is clogged!"
+msgstr "Лоо забилось!"
+
+#: iGottaPackage/templates/errors/500.html:7
+msgid "An unexpected error has occured."
+msgstr "Произошла непредвиденная ошибка."
 
 #: iGottaPackage/templates/errors/500.html:8
-msgid "The administrator has been notified. Sorry for the inconvenience!"
-msgstr "Администратор был уведомлен. Приносим извинения за неудобства!"
+msgid "The administrator has been notified, sorry for the inconvenience!"
+msgstr "Администратор был извещен об этом, извините за неудобства!"
 
 #~ msgid "Say something"
 #~ msgstr "Поговори со мной."
@@ -307,4 +323,13 @@ msgstr "Администратор был уведомлен. Приносим �
 
 #~ msgid "%(username)s said %(when)s"
 #~ msgstr "%(username)s said %(when)s"
+
+#~ msgid "Not Found"
+#~ msgstr "Не найдено"
+
+#~ msgid "An unexpected error has occurred"
+#~ msgstr "произошла неожиданная ошибка"
+
+#~ msgid "The administrator has been notified. Sorry for the inconvenience!"
+#~ msgstr "Администратор был уведомлен. Приносим извинения за неудобства!"
 

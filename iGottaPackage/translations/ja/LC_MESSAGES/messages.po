@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-28 21:42-0800\n"
+"POT-Creation-Date: 2018-03-12 18:44-0700\n"
 "PO-Revision-Date: 2018-02-09 05:14-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -111,49 +111,49 @@ msgstr "送信"
 msgid "Comment"
 msgstr "コメント"
 
-#: iGottaPackage/main/forms.py:31 iGottaPackage/main/routes.py:163
+#: iGottaPackage/main/forms.py:31 iGottaPackage/main/routes.py:144
 msgid "Search"
 msgstr "サーチ"
 
-#: iGottaPackage/main/routes.py:55
+#: iGottaPackage/main/routes.py:36
 msgid "Your post is now up!"
 msgstr "あなたの投稿は今すぐアップです！"
 
-#: iGottaPackage/main/routes.py:63 iGottaPackage/templates/base.html:30
+#: iGottaPackage/main/routes.py:44 iGottaPackage/templates/base.html:35
 msgid "Home"
 msgstr "ホーム"
 
-#: iGottaPackage/main/routes.py:75 iGottaPackage/templates/base.html:31
+#: iGottaPackage/main/routes.py:56 iGottaPackage/templates/base.html:36
 msgid "Explore"
 msgstr "探ります"
 
-#: iGottaPackage/main/routes.py:106
+#: iGottaPackage/main/routes.py:87
 msgid "Your changes have been saved."
 msgstr "変更を保存しました。"
 
-#: iGottaPackage/main/routes.py:111 iGottaPackage/templates/edit_profile.html:5
+#: iGottaPackage/main/routes.py:92 iGottaPackage/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "プロフィールを編集"
 
-#: iGottaPackage/main/routes.py:119 iGottaPackage/main/routes.py:135
+#: iGottaPackage/main/routes.py:100 iGottaPackage/main/routes.py:116
 #, python-format
 msgid "User %(username)s not found."
 msgstr "ユーザー %(username)s が見つかりません。"
 
-#: iGottaPackage/main/routes.py:122
+#: iGottaPackage/main/routes.py:103
 msgid "You cannot follow yourself!"
 msgstr "自分にフォローすることはできません。"
 
-#: iGottaPackage/main/routes.py:126
+#: iGottaPackage/main/routes.py:107
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "%(username)s にフォローします！"
 
-#: iGottaPackage/main/routes.py:138
+#: iGottaPackage/main/routes.py:119
 msgid "You cannot unfollow yourself!"
 msgstr "自分アンフォローすることはできません！"
 
-#: iGottaPackage/main/routes.py:142
+#: iGottaPackage/main/routes.py:123
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "あなたは　%(username)s にフォローしません。"
@@ -171,27 +171,27 @@ msgstr "翻訳"
 msgid "Delete"
 msgstr "削除"
 
-#: iGottaPackage/templates/base.html:12
+#: iGottaPackage/templates/base.html:17
 msgid "Welcome to iGotta"
 msgstr "iGottaへようこそ"
 
-#: iGottaPackage/templates/base.html:42
+#: iGottaPackage/templates/base.html:47
 msgid "Login"
 msgstr "ログイン"
 
-#: iGottaPackage/templates/base.html:44
+#: iGottaPackage/templates/base.html:49
 msgid "Maps"
 msgstr "地図"
 
-#: iGottaPackage/templates/base.html:45
+#: iGottaPackage/templates/base.html:50
 msgid "Profile"
 msgstr "プロフィール"
 
-#: iGottaPackage/templates/base.html:46
+#: iGottaPackage/templates/base.html:51
 msgid "Logout"
 msgstr "ログアウト"
 
-#: iGottaPackage/templates/base.html:83
+#: iGottaPackage/templates/base.html:88
 msgid "Error: Could not contact server."
 msgstr "エラー：サーバーに接続できませんでした。"
 
@@ -228,19 +228,19 @@ msgstr "あなたのプロフィール画像を使用して管理する"
 msgid "User"
 msgstr "ユーザー"
 
-#: iGottaPackage/templates/user.html:17
-#: iGottaPackage/templates/user_popup.html:9
+#: iGottaPackage/templates/user.html:14
+#: iGottaPackage/templates/user_popup.html:8
 msgid "Last Online"
 msgstr "最終オンライン"
 
-#: iGottaPackage/templates/user.html:19
-#: iGottaPackage/templates/user_popup.html:11
+#: iGottaPackage/templates/user.html:16
+#: iGottaPackage/templates/user_popup.html:10
 #, python-format
 msgid "%(count)d followers"
 msgstr "%(count)d フォロワー"
 
-#: iGottaPackage/templates/user.html:19
-#: iGottaPackage/templates/user_popup.html:11
+#: iGottaPackage/templates/user.html:16
+#: iGottaPackage/templates/user_popup.html:10
 #, python-format
 msgid "%(count)d following"
 msgstr "%(count)d フォローする"
@@ -279,22 +279,38 @@ msgstr "クリックしてリセットする"
 msgid "Reset Your Password"
 msgstr "パスワードをリセットしてください"
 
-#: iGottaPackage/templates/errors/404.html:4
-msgid "Not Found"
-msgstr "見つかりませんでした。"
+#: iGottaPackage/templates/errors/404.html:5
+msgid "Page Not Found"
+msgstr "ページが見つかりません"
 
-#: iGottaPackage/templates/errors/404.html:9
+#: iGottaPackage/templates/errors/404.html:6
+msgid "The page you requested does not exist."
+msgstr "リクエストしたページは存在しません。"
+
+#: iGottaPackage/templates/errors/404.html:7
+msgid "...or it is taking a bathroom break."
+msgstr "...またはそれは浴室の休憩を取っている。"
+
+#: iGottaPackage/templates/errors/404.html:11
 #: iGottaPackage/templates/errors/500.html:12
 msgid "Back"
 msgstr "戻る"
 
-#: iGottaPackage/templates/errors/500.html:4
-msgid "An unexpected error has occurred"
-msgstr "予期しないエラーが発生しました"
+#: iGottaPackage/templates/errors/500.html:5
+msgid "Internal Server Error"
+msgstr "内部サーバーエラー"
+
+#: iGottaPackage/templates/errors/500.html:6
+msgid "The loo is clogged!"
+msgstr "トイは詰まっている！"
+
+#: iGottaPackage/templates/errors/500.html:7
+msgid "An unexpected error has occured."
+msgstr "予期しないエラーが発生しました。"
 
 #: iGottaPackage/templates/errors/500.html:8
-msgid "The administrator has been notified. Sorry for the inconvenience!"
-msgstr "管理者に通知されました。ご不便おかけしてすみません！"
+msgid "The administrator has been notified, sorry for the inconvenience!"
+msgstr "管理者に通知されました。ご迷惑をおかけして申し訳ありません。"
 
 #~ msgid "Say something"
 #~ msgstr "何を言う..."
@@ -307,4 +323,13 @@ msgstr "管理者に通知されました。ご不便おかけしてすみませ
 
 #~ msgid "%(username)s said %(when)s"
 #~ msgstr "%(username)s　は %(when)s"
+
+#~ msgid "Not Found"
+#~ msgstr "見つかりませんでした。"
+
+#~ msgid "An unexpected error has occurred"
+#~ msgstr "予期しないエラーが発生しました"
+
+#~ msgid "The administrator has been notified. Sorry for the inconvenience!"
+#~ msgstr "管理者に通知されました。ご不便おかけしてすみません！"
 

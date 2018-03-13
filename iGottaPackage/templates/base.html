@@ -3,12 +3,7 @@
 {% block head %}
     {{ super() }}
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-
-{#TODO: checkout MapBox API vs GoogleMaps#}
-{#    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>    #}
-{#<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />#}
-
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 
 {% block title %}
@@ -67,7 +62,6 @@
         {% endif %}
         {% endwith %}
 
-        {# application content needs to be provided in the app_content block #}
         {% block app_content %}{% endblock %}
     </div>
 {% endblock %}
@@ -132,5 +126,6 @@
             );
         });
     </script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 {% endblock %}
 
