@@ -10,8 +10,6 @@ class Config(object):
     FLASK_APP = os.environ.get('FLASK_APP') or os.path.join(basedir, 'igotta.py')
     DEBUG = False
     TESTING = False
-    # force an SQLite database to exist purely in memory is to open the database using the special filename ":memory:". DB ceases to exists once connection is lost
-    SQLALCHEMY_DATABASE_URI = 'sqlite://:memory:'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LANGUAGES = ['en', 'es', 'fr', 'ja', 'ru']
     SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -53,7 +51,9 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    # SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    # force an SQLite database to exist purely in memory is to open the database using the special filename ":memory:". DB ceases to exists once connection is lost
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     ELASTICSEARCH_URL = None
     BONSAI_URL = None
 

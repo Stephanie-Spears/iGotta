@@ -25,7 +25,7 @@ class SearchableMixin(object):
         when = []
         for i in range(len(ids)):
             when.append((ids[i], i))
-        # TODO: currently ordering by search match liklihood, add order_by date option
+        # TODO: currently ordering by search match likelihood, add order_by date option
         return cls.query.filter(cls.id.in_(ids)).order_by(db.case(when, value=cls.id)), total
 
     @classmethod

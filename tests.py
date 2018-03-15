@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 from coverage import coverage
-from datetime import datetime, timedelta
-import unittest
-from iGottaPackage import create_Testing_app, db
-from iGottaPackage.models import User, Post
-from config import TestingConfig, basedir
-import os
-
 cov = coverage(branch=True, omit=['flask/*', 'tests.py', 'venv/*'])
 cov.start()
+
+import os
+import unittest
+from datetime import datetime, timedelta
+from config import TestingConfig, basedir
+from iGottaPackage import create_Testing_app, db
+from iGottaPackage.models import User, Post
+from iGottaPackage.auth.forms import ValidationError
 
 
 class UserModelCase(unittest.TestCase):
@@ -112,15 +113,49 @@ class UserModelCase(unittest.TestCase):
         db.session.commit()
 
 
+    # Doesn't give more coverage percentage during debug. Necessary test?
+    def test_validate_username(self):
+        def validate_username(username):
+            if User.query.filter_by(username=username).first() is None:
+                return username
+            version = 2
+            while True:
+                new_username = username + str(version)
+                if User.query.filter_by(username=new_username).first() is None:
+                    break
+                version += 1
+            return new_username
+        # create a user and write it to the database
+        u = User(username='John', email='John@example.com')
+        # u = User(username='John', email='John@example.com')
+        db.session.add(u)
+        db.session.commit()
+        username = validate_username('Susan')
+        assert username == 'Susan'
+        username = validate_username('John')
+        assert username != 'John'
+        # make another user with the new username
+        u = User(username=username, email='Susan@example.com')
+        db.session.add(u)
+        db.session.commit()
+        username2 = validate_username('John')
+        assert username2 != 'John'
+        assert username2 != username
+
+
 if __name__ == '__main__':
     try:
-        unittest.main()
+        unittest.main(verbosity=2)
     except Exception as e:
         print(str(e))
         pass
+    except BaseException as err:
+        print(str(err))
+        pass
+    except:
+        pass
     cov.stop()
     cov.save()
-    print("\n\nCoverage Report:\n")
     cov.report()
     print("HTML version: " + os.path.join(basedir, "tmp/coverage/index.html"))
     cov.html_report(directory='tmp/coverage')
