@@ -9,7 +9,6 @@ from datetime import datetime, timedelta
 from config import TestingConfig, basedir
 from iGottaPackage import create_Testing_app, db
 from iGottaPackage.models import User, Post
-from iGottaPackage.auth.forms import ValidationError
 
 
 class UserModelCase(unittest.TestCase):

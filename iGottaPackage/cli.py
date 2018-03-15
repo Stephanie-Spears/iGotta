@@ -42,6 +42,11 @@ def register(app):
     @clean.command()
     @click.argument('dblist', nargs=-1)
     def makeclean(dblist):
+        """clear dev env of elasticsearch 'Post' indices and database files"""
+        if app.config['DEBUG']:
+            print("Removing Elasticsearch Index 'Post'\n")
+            os.system("curl -XDELETE 'localhost:9200/post?pretty'")
+
         remove_files = []
         try:
             for db in dblist:

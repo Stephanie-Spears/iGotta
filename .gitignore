@@ -39,3 +39,4 @@ venv
 app.db
 igotta.log*
 .env
+/tmp

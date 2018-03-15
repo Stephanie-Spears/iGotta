@@ -1,5 +1,6 @@
 import os.path
 import shutil
+from iGottaPackage import current_app
 
 remove_files = ["app.db", ]
 remove_tree = ["migrations/", "logs/", ]
@@ -15,4 +16,3 @@ for item in concat_list:
     if item in remove_tree and os.path.exists(item):
         shutil.rmtree(item)
         print("Removed Tree: " + item)
-
