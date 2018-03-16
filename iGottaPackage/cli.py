@@ -59,18 +59,20 @@ def register(app):
     def makeclean(apptype):
         """clear dev env of elasticsearch 'Post' indices and database files"""
         remove_db = []
+        remove_tree = []
         if apptype == "development":
             print("Removing Elasticsearch Index 'Post'\n")
             os.system("curl -XDELETE 'localhost:9200/post?pretty'")
             remove_db.append("app.db")
+            remove_tree = ["DevelopmentInstance/migrations/"]
 
         if apptype == "production":
             print("Removing Bonsai Index 'Post'\n")
             os.system("curl -XDELETE '" + str(app.config['BONSAI_URL']) + "/post?pretty'")
             os.system("heroku pg:reset " + "postgresql-silhouetted-21445 --confirm i-gotta")
+            remove_tree = ["migrations/", "logs/", "tmp/"]
 
         try:
-            remove_tree = ["migrations/", "logs/", "tmp/"]
             concat_list = remove_db + remove_tree
             for item in concat_list:
                 if not os.path.exists(item):
