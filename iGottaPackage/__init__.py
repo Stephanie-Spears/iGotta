@@ -131,7 +131,7 @@ def create_Production_app(config_class=ProductionConfig):
         app.logger.addHandler(file_handler)
 
         app.logger.setLevel(logging.INFO)
-        app.logger.info('iGotta startup')
+        app.logger.info('iGotta Production Instance Startup')
 
     return app
 
