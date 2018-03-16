@@ -142,7 +142,7 @@ def create_Testing_app(config_class=TestingConfig):
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
-    # mail.init_app(app)
+    mail.init_app(app)
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)

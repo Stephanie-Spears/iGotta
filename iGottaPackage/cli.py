@@ -40,33 +40,48 @@ def register(app):
         pass
 
     @clean.command()
-    @click.argument('dblist', nargs=-1)
-    def makeclean(dblist):
-        """clear dev env of elasticsearch 'Post' indices and database files"""
-        if app.config['DEBUG']:
-            print("Removing Elasticsearch Index 'Post'\n")
-            os.system("curl -XDELETE 'localhost:9200/post?pretty'")
-
+    @click.argument('filelist', nargs=-1)
+    def removefiles(filelist):
         remove_files = []
         try:
-            for db in dblist:
-                remove_files.append(str(db.strip()))
-                print("Remove Files: ", remove_files)
-                if not db.endswith(".db"):
-                    raise ValueError("Error: database files must have the '.db' file extension to be removed.")
+            for file in filelist:
+                remove_files.append(str(file.strip()))
+                if not os.path.exists(file):
+                    print("'" + file + "' does not exist.")
+                if file in remove_files and os.path.exists(file):
+                    os.remove(file)
+                    print("Removed File: " + file)
+        except Exception as e:
+            print(str(e))
+
+    @click.argument('apptype')
+    @clean.command()
+    def makeclean(apptype):
+        """clear dev env of elasticsearch 'Post' indices and database files"""
+        remove_db = []
+        if apptype == "development":
+            print("Removing Elasticsearch Index 'Post'\n")
+            os.system("curl -XDELETE 'localhost:9200/post?pretty'")
+            remove_db.append("app.db")
+
+        if apptype == "production":
+            print("Removing Bonsai Index 'Post'\n")
+            os.system("curl -XDELETE '" + str(app.config['BONSAI_URL']) + "/post?pretty'")
+            os.system("heroku pg:reset " + "postgresql-silhouetted-21445 --confirm i-gotta")
+
+        try:
+            remove_tree = ["migrations/", "logs/", "tmp/"]
+            concat_list = remove_db + remove_tree
+            for item in concat_list:
+                if not os.path.exists(item):
+                    print("'" + item + "' does not exist.")
+                if item in remove_db and os.path.exists(item):
+                    os.remove(item)
+                    print("Removed File: " + item)
+                if item in remove_tree and os.path.exists(item):
+                    shutil.rmtree(item)
+                    print("Removed Tree: " + item)
+
         except Exception as e:
             print("Error Occured: go back to cli.py and define better exception messages if you want to know why!\nJust kidding, here you go:\n" + str(e))
 
-        remove_tree = ["migrations/", "logs/", "tmp/"]
-
-        concat_list = remove_files + remove_tree
-
-        for item in concat_list:
-            if not os.path.exists(item):
-                print("'" + item + "' does not exist.")
-            if item in remove_files and os.path.exists(item):
-                os.remove(item)
-                print("Removed File: " + item)
-            if item in remove_tree and os.path.exists(item):
-                shutil.rmtree(item)
-                print("Removed Tree: " + item)

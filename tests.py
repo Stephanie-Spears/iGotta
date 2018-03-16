@@ -148,10 +148,8 @@ if __name__ == '__main__':
     except Exception as e:
         print(str(e))
         pass
-    except BaseException as err:
-        print(str(err))
-        pass
-    except:
+    except BaseException as e:
+        print(str(e))
         pass
     cov.stop()
     cov.save()
