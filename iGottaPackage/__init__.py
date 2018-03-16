@@ -103,6 +103,7 @@ def create_Production_app(config_class=ProductionConfig):
             'http_auth': (auth[0], auth[1])
         }]
         app.elasticsearch = Elasticsearch(es_header)
+        current_app.elasticsearch = Elasticsearch(es_header)
 
         if app.config['MAIL_SERVER']:
             auth = None

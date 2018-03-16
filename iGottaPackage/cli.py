@@ -64,7 +64,7 @@ def register(app):
             print("Removing Elasticsearch Index 'Post'\n")
             os.system("curl -XDELETE 'localhost:9200/post?pretty'")
             remove_db.append("app.db")
-            remove_tree = ["DevelopmentInstance/migrations/"]
+            remove_tree = ["DevelopmentInstance/migrations/", "DevelopmentInstance/logs/"]
 
         if apptype == "production":
             print("Removing Bonsai Index 'Post'\n")
