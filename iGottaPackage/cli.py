@@ -42,9 +42,15 @@ def register(app):
     @clean.command()
     @click.argument('filelist', nargs=-1)
     def removefiles(filelist):
+        basedir = os.path.abspath(os.path.dirname(__file__))
+
         remove_files = []
         try:
             for file in filelist:
+                # TODO: CHECK IF SETTING BASEDIR GUARD WORKS
+                if not str(file).startswith(basedir):
+                    print("Base Directory Outside of Project, be careful dummy!")
+                    raise Exception
                 remove_files.append(str(file.strip()))
                 if not os.path.exists(file):
                     print("'" + file + "' does not exist.")
@@ -57,20 +63,21 @@ def register(app):
     @click.argument('apptype')
     @clean.command()
     def makeclean(apptype):
-        """clear dev env of elasticsearch 'Post' indices and database files"""
+        """clear dev env of elasticsearch 'Post' and '.Kibana' indices and database files"""
         remove_db = []
         remove_tree = []
         if apptype == "development":
-            print("Removing Elasticsearch Index 'Post'\n")
+            print("Removing Elasticsearch Index 'post'\n")
             os.system("curl -XDELETE 'localhost:9200/post?pretty'")
             remove_db.append("app.db")
             remove_tree = ["DevelopmentInstance/migrations/"]
 
         if apptype == "production":
-            print("Removing Bonsai Index 'Post'\n")
+            print("Removing Bonsai Index 'post'\n")
             os.system("curl -XDELETE '" + str(app.config['BONSAI_URL']) + "/post?pretty'")
             os.system("heroku pg:reset " + "postgresql-silhouetted-21445 --confirm i-gotta")
             remove_tree = ["migrations/", "logs/", "tmp/"]
+            os.system("curl -XPUT 'https://qf3n32mxmh:uc4ys1788y@privet-7530964.us-east-1.bonsaisearch.net/post?pretty'")
 
         try:
             concat_list = remove_db + remove_tree

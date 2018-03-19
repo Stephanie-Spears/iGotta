@@ -12,6 +12,7 @@ from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 from config import ProductionConfig, DevelopmentConfig, TestingConfig
 
@@ -27,7 +28,7 @@ moment = Moment()
 babel = Babel()
 
 
-def create_Development_app(config_class=DevelopmentConfig):
+def create_development_app(config_class=DevelopmentConfig):
     app = Flask(__name__)
     app.config.from_object(config_class)
     db.init_app(app)
@@ -71,7 +72,7 @@ def create_Development_app(config_class=DevelopmentConfig):
     return app
 
 
-def create_Production_app(config_class=ProductionConfig):
+def create_production_app(config_class=ProductionConfig):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
@@ -92,51 +93,52 @@ def create_Production_app(config_class=ProductionConfig):
     from iGottaPackage.main import bp as main_bp
     app.register_blueprint(main_bp)
 
-    if not app.debug and not app.testing:
-        bonsai = os.environ['BONSAI_URL']
-        auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
-        host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
-        es_header = [{
-            'host': host,
-            'port': 443,
-            'use_ssl': True,
-            'http_auth': (auth[0], auth[1])
-        }]
-        app.elasticsearch = Elasticsearch(es_header)
+    bonsai = os.environ['BONSAI_URL']
+    auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
+    host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
+    es_header = [{
+        'host': host,
+        'port': 443,
+        'use_ssl': True,
+        'http_auth': (auth[0], auth[1])
+    }]
+    app.elasticsearch = Elasticsearch(es_header)
+    # curl - XPUT
+    # 'https://qf3n32mxmh:uc4ys1788y@privet-7530964.us-east-1.bonsaisearch.net/post?pretty'
 
-        if app.config['MAIL_SERVER']:
-            auth = None
-            if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
-                auth = (app.config['MAIL_USERNAME'],
-                        app.config['MAIL_PASSWORD'])
-            secure = None
-            if app.config['MAIL_USE_TLS']:
-                secure = ()
-            mail_handler = SMTPHandler(
-                mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
-                fromaddr='no-reply@' + app.config['MAIL_SERVER'],
-                toaddrs=app.config['ADMINS'], subject='iGotta Failure',
-                credentials=auth, secure=secure)
-            mail_handler.setLevel(logging.ERROR)
-            app.logger.addHandler(mail_handler)
+    if app.config['MAIL_SERVER']:
+        auth = None
+        if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
+            auth = (app.config['MAIL_USERNAME'],
+                    app.config['MAIL_PASSWORD'])
+        secure = None
+        if app.config['MAIL_USE_TLS']:
+            secure = ()
+        mail_handler = SMTPHandler(
+            mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+            fromaddr='no-reply@' + app.config['MAIL_SERVER'],
+            toaddrs=app.config['ADMINS'], subject='iGotta Failure',
+            credentials=auth, secure=secure)
+        mail_handler.setLevel(logging.ERROR)
+        app.logger.addHandler(mail_handler)
 
-        if not os.path.exists('logs'):
-            os.mkdir('logs')
-        file_handler = RotatingFileHandler('logs/igotta.log',
-                                           maxBytes=10240, backupCount=10)
-        file_handler.setFormatter(logging.Formatter(
-            '%(asctime)s %(levelname)s: %(message)s '
-            '[in %(pathname)s:%(lineno)d]'))
-        file_handler.setLevel(logging.INFO)
-        app.logger.addHandler(file_handler)
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler('logs/igottaProduction.log',
+                                       maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s '
+        '[in %(pathname)s:%(lineno)d]'))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
 
-        app.logger.setLevel(logging.INFO)
-        app.logger.info('iGotta Production Instance Startup')
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('iGotta Production Instance Startup')
 
     return app
 
 
-def create_Testing_app(config_class=TestingConfig):
+def create_testing_app(config_class=TestingConfig):
     app = Flask(__name__)
     app.config.from_object(config_class)
     db.init_app(app)

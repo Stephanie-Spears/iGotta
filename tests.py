@@ -7,13 +7,13 @@ import os
 import unittest
 from datetime import datetime, timedelta
 from config import TestingConfig, basedir
-from iGottaPackage import create_Testing_app, db
+from iGottaPackage import create_testing_app, db
 from iGottaPackage.models import User, Post
 
 
 class UserModelCase(unittest.TestCase):
     def setUp(self):
-        self.app = create_Testing_app(TestingConfig)
+        self.app = create_testing_app(TestingConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
