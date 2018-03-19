@@ -10,11 +10,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from iGottaPackage import db, login
 from iGottaPackage.search import add_to_index, remove_from_index, query_index
 
-# from flask.ext.sqlalchemy import SQLAlchemy, BaseQuery
-# from sqlalchemy_searchable import SearchQueryMixin
-# from sqlalchemy_utils.types import TSVectorType
-# from sqlalchemy_searchable import make_searchable
-
 
 class SearchableMixin(object):
     @classmethod
@@ -131,6 +126,7 @@ class Post(SearchableMixin, db.Model):
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # bathroom_id = db.Column(db.Integer, db.ForeignKey('bathroom.id'))
     language = db.Column(db.String(5))
 
     def __repr__(self):
@@ -141,60 +137,42 @@ db.event.listen(db.session, 'before_commit', Post.before_commit)
 db.event.listen(db.session, 'after_commit', Post.after_commit)
 
 
-# class Bathroom():
-# class ArticleQuery(db.Model, SearchQueryMixin):
-#     pass
+# TODO: address as string or parsing for lat/lng or separate?
+# todo: figure out how to link posts/users
+class Bathroom(SearchableMixin, db.Model):
+    __searchable__ = ['bathroom_name', 'bathroom_about']
+    id = db.Column(db.Integer, primary_key=True)
+    bathroom_name = db.Column(db.String(64), index=True, unique=True)
+    bathroom_about = db.Column(db.String(140))
+    bathroom_address = db.Column(db.String(120), index=True, unique=True)
+    image_filename = db.Column(db.String, default=None, nullable=True)
+    image_url = db.Column(db.String, default=None, nullable=True)
+    # bathroom_posts = db.relationship('Post', backref='owner', lazy='dynamic')
 
+    def __init__(self, bathroom_name, bathroom_about, bathroom_address, image_filename=None, image_url=None):
+        self.bathroom_name = bathroom_name
+        self.bathroom_about = bathroom_about
+        self.bathroom_address = bathroom_address
+        self.image_filename = image_filename
+        self.image_url = image_url
+        # self.user_id = user_id
 
+    def __repr__(self):
+        return '<Bathroom {}>'.format(self.bathroom_name)
 
-
-
-
-# DATABASE MODEL:
 #
-# app = Flask(__name__)
-# csrf = CsrfProtect(app)
-# csrf.init_app(app)
+# class BathroomPost(SearchableMixin, db.Model):
+#     __searchable__ = ['bathroom_body']
+#     id = db.Column(db.Integer, primary_key=True)
+#     bathroom_body = db.Column(db.String(140))
+#     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+#     bathroom_id = db.Column(db.Integer, db.ForeignKey('bathroom.id'))
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     language = db.Column(db.String(5))
 #
-# db = SQLAlchemy(app)
-#
-# class ArticleQuery(BaseQuery, SearchQueryMixin):
-#     pass
+#     def __repr__(self):
+#         return '<BathroomPost {}>'.format(self.bathroom_body)
 #
 #
-# class latest_movies_scraper(db.Model):
-#     query_class = ArticleQuery
-#     __tablename__ = 'latest_movies_scraper'
-#     id = db.Column(sa.Integer, primary_key=True)
-#     name = db.Column(db.Unicode(255))
-#     url = db.Column(db.Unicode(255))
-#     image_url = db.Column(db.Unicode(255))
-#     create = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-#     search_vector = db.Column(TSVectorType('name'))
-# How i'm saving to database:
-#
-# check_if_exists = latest_movies_scraper.query.filter_by(name=dictionary['title']).first()
-#
-#                     if check_if_exists:
-#                         print check_if_exists.name
-#                         print 'skipping this...'
-#                         pass
-#                     else:
-#
-#                         insert_to_db = latest_movies_scraper(name=dictionary['title'], url=dictionary['href'], image_url=dictionary['featured_image'])
-#                         db.session.add(insert_to_db)
-#                         db.session.commit()
-# How I am using search capbilitiy functionality:
-#
-# name = latest_movies_scraper.query.search(u'Black Panther (2018)').limit(5).all()
-# Name returns empty array, but it should return me the name list instead
-
-
-
-# SQLAlchemy-Searchable doesn't index existing data. This has to be done manually by performing a synchronisation. For the table definition above the code below is sufficient:
-#
-# from sqlalchemy_searchable import sync_trigger
-#
-# def sync_fts():
-#     sync_trigger(db.engine, 'latest_movies_scraper', 'search_vector', ['name'])
-# This code would normally be part of the db management tools (Flask-Script, Click).
+# db.event.listen(db.session, 'before_commit', BathroomPost.before_commit)
+# db.event.listen(db.session, 'after_commit', BathroomPost.after_commit)

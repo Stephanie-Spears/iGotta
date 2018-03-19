@@ -7,12 +7,13 @@ from elasticsearch import Elasticsearch
 from flask import Flask, request, current_app
 from flask_babel import Babel, lazy_gettext as _l
 from flask_bootstrap import Bootstrap
+from flask_googlemaps import GoogleMaps
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from flask_uploads import UploadSet, IMAGES, configure_uploads
 
 from config import ProductionConfig, DevelopmentConfig, TestingConfig
 
@@ -26,6 +27,8 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 babel = Babel()
+googlemaps = GoogleMaps()
+images = UploadSet('images', IMAGES)
 
 
 def create_development_app(config_class=DevelopmentConfig):
@@ -38,11 +41,19 @@ def create_development_app(config_class=DevelopmentConfig):
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
+    googlemaps.init_app(app)
+    configure_uploads(app, images)
 
-    if app.config['ELASTICSEARCH_URL']:
-        app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
-    else:
-        app.elasticsearch = None
+    from iGottaPackage.errors import bp as errors_bp
+    app.register_blueprint(errors_bp)
+
+    from iGottaPackage.auth import bp as auth_bp
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+
+    from iGottaPackage.main import bp as main_bp
+    app.register_blueprint(main_bp)
+
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
 
     if app.config['MAIL_SERVER']:
         auth = None
@@ -60,15 +71,6 @@ def create_development_app(config_class=DevelopmentConfig):
         mail_handler.setLevel(logging.ERROR)
         app.logger.addHandler(mail_handler)
 
-    from iGottaPackage.errors import bp as errors_bp
-    app.register_blueprint(errors_bp)
-
-    from iGottaPackage.auth import bp as auth_bp
-    app.register_blueprint(auth_bp, url_prefix='/auth')
-
-    from iGottaPackage.main import bp as main_bp
-    app.register_blueprint(main_bp)
-
     return app
 
 
@@ -83,6 +85,8 @@ def create_production_app(config_class=ProductionConfig):
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
+    googlemaps.init_app(app)
+    configure_uploads(app, images)
 
     from iGottaPackage.errors import bp as errors_bp
     app.register_blueprint(errors_bp)

@@ -2,13 +2,14 @@ from datetime import datetime
 
 from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app
 from flask_babel import _, get_locale
+from flask_googlemaps import Map
 from flask_login import current_user, login_required
 from langdetect import detect
 
-from iGottaPackage import db
+from iGottaPackage import db, images
 from iGottaPackage.main import bp
-from iGottaPackage.main.forms import EditProfileForm, PostForm, SearchForm
-from iGottaPackage.models import User, Post
+from iGottaPackage.main.forms import EditProfileForm, PostForm, SearchForm, BathroomForm
+from iGottaPackage.models import User, Post, Bathroom
 from iGottaPackage.translate import translate
 
 
@@ -149,18 +150,84 @@ def search():
 def delete(id):
     post = Post.query.get(id)
     if post is None:
-        flash('Post not found.')
+        flash(_('Post not found.'))
         return redirect(url_for('main.index'))
     if post.author.id != current_user.id:
-        flash('You cannot delete this post.')
+        flash(_('You cannot delete this post.'))
         return redirect(url_for('main.index'))
     db.session.delete(post)
     db.session.commit()
-    flash('Your post has been deleted.')
+    flash(_('Your post has been deleted.'))
     return redirect(url_for('main.index'))
+
+
+@bp.route('/add_bathroom/', methods=['GET', 'POST'])
+@login_required
+def add_bathroom():
+    form = BathroomForm()
+    if form.validate_on_submit():
+        filename = images.save(request.files['bathroom_image'])
+        url = images.url(filename)
+        new_bathroom = Bathroom(form.bathroom_name.data, form.bathroom_about.data, form.bathroom_address.data, filename, url)
+        db.session.add(new_bathroom)
+        db.session.commit()
+        flash(_('The bathroom: {} is now up!').format(new_bathroom.bathroom_name))
+        return redirect(url_for('main.bathroom', bathroom_name=new_bathroom.bathroom_name))
+    return render_template('add_bathroom.html', form=form)
+
+
+@bp.route('/bathroom/<bathroom_name>')
+@login_required
+def bathroom(bathroom_name):
+    new_bathroom = Bathroom.query.filter_by(bathroom_name=bathroom_name).first_or_404()
+    return render_template('bathroom.html', new_bathroom=new_bathroom)
+    # page = request.args.get('page', 1, type=int)
+    # bathroom_posts = bathroom.bathroom_posts.order_by(Post.timestamp.desc()).paginate(page, current_app.config['POSTS_PER_PAGE'], False)
+    # next_url = url_for('main.bathroom', bathroom_name=bathroom.bathroom_name, page=bathroom_posts.next_num) \
+    #     if bathroom_posts.has_next else None
+    # prev_url = url_for('main.bathroom', bathroom_name=bathroom.bathroom_name, page=bathroom_posts.prev_num) \
+    #     if bathroom_posts.has_prev else None
+    # return render_template('bathroom.html', bathroom=bathroom, bathroom_posts=bathroom_posts.items, next_url=next_url, prev_url=prev_url)
+
+
+# todo: reinstigate popup html
+# @bp.route('/bathroom/<bathroom_name>/popup')
+# @login_required
+# def bathroom_popup(bathroom_name):
+#     bathroom = Bathroom.query.filter_by(bathroom_name=bathroom_name).first_or_404()
+#     return render_template('bathroom_popup.html', bathroom=bathroom)
 
 
 @bp.route('/maps')
 @login_required
 def maps():
-    return render_template('maps.html')
+    # todo: remove hardcoded bathrooms
+    bathroommap = Map(
+        identifier="bathroommap",
+        style="height:100%;width:100%;margin:0;padding:0;",
+        lat=45.519322,
+        lng=-122.623073,
+        markers=[
+            {
+                'icon': 'static/img/toilet-icon.png',
+                'lat': 45.520705,
+                'lng': -122.677570,
+                'infobox': "<h1>Pu-Pu-Punk</h1><br><b>So punk. The most hardcore toilet in Portland. A literal shithole.</b>"
+            },
+            {
+                'icon': 'static/img/toilet-icon.png',
+                'lat': 45.511835,
+                'lng': -122.623733,
+                'infobox': "<h1>Taco Toots-day</h1><br><b>Located right inside Portland's spiciest Burrito spot, Anillo de Fuego!</b>"
+            }
+        ]
+    )
+    return render_template('maps.html', bathroommap=bathroommap)
+    # todo: remove below if flask ext is adequate
+    # gmaps = googlemaps.Client(key=current_app.config['GOOGLEMAPS_KEY'])
+    # geolocate_results = gmaps.geolocate(consider_ip=True)
+    # geocode_result = gmaps.geocode('2755 SE 32nd, Portland, OR')
+    # reverse_geocode_result = gmaps.reverse_geocode((45.507889, -122.613662))
+    # now = datetime.now()
+    # # directions_result = gmaps.directions(geocode_result, reverse_geocode_result, mode="transit", departure_time=now)
+    # return render_template('maps.html')

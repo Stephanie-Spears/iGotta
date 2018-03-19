@@ -37,6 +37,6 @@ nosetests.xml
 
 venv
 app.db
-igotta.log*
+logs
 .env
-/tmp
+migrations

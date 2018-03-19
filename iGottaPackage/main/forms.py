@@ -1,9 +1,11 @@
 from flask import request
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Length
 from flask_babel import _, lazy_gettext as _l
 from iGottaPackage.models import User
+from iGottaPackage import images
 
 
 class EditProfileForm(FlaskForm):
@@ -36,3 +38,13 @@ class SearchForm(FlaskForm):
         if 'csrf_enabled' not in kwargs:
             kwargs['csrf_enabled'] = False
         super(SearchForm, self).__init__(*args, **kwargs)
+
+
+# todo: allow image upload here
+class BathroomForm(FlaskForm):
+    bathroom_name = StringField(_l('Bathroom Name'), validators=[DataRequired()])
+    # todo: should location be int or string? Check parsing
+    bathroom_about = TextAreaField(_l('Bathroom About'), validators=[DataRequired()])
+    bathroom_address = StringField(_l('Bathroom Address'), validators=[DataRequired()])
+    bathroom_image = FileField(_l('Bathroom Photo'), validators=[FileRequired(), FileAllowed(images, _('Images Only!'))])
+    submit = SubmitField(_l('Submit'))

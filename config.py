@@ -13,15 +13,19 @@ class Config(object):
     LANGUAGES = ['en', 'es', 'fr', 'ja', 'ru']
     SECRET_KEY = os.environ.get('SECRET_KEY')
     POSTS_PER_PAGE = 10
+    # todo: make sure uploads is right directory, update for production to use aws s3?
+    # Uploads
+    UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'iGottaPackage/static/img/bathrooms/')
+    UPLOADS_DEFAULT_URL = 'http://localhost:5000/static/img/bathrooms/'
+
+    UPLOADED_IMAGES_DEST = os.path.join(basedir, 'iGottaPackage/static/img/bathrooms/')
+    UPLOADED_IMAGES_URL = 'http://localhost:5000/static/img/bathrooms/'
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
     FLASK_DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
-    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
-    GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
-    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
 
     MAIL_SERVER = os.environ.get('GMAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT_TLS') or 25)
@@ -29,6 +33,10 @@ class DevelopmentConfig(Config):
     MAIL_USERNAME = os.environ.get('GMAIL_USERNAME_ONE_ONE')
     MAIL_PASSWORD = os.environ.get('GMAIL_ONE_ONE_APP_PASSWORD')
     ADMINS = [os.environ.get('ADMINS')]
+
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+    GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
 
 
 class ProductionConfig(Config):
@@ -44,7 +52,6 @@ class ProductionConfig(Config):
 
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
-
     BONSAI_URL = os.environ.get('BONSAI_URL')
 
 

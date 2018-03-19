@@ -48,30 +48,18 @@ def register(app):
 
         # TODO: check that these makecleans work for both
         if apptype == "development":
-            print("Removing Elasticsearch Index 'post'\n")
-            os.system("curl -XDELETE 'localhost:9200/post?pretty'")
+            print("Removing Elasticsearch Index 'post' and 'bathroom'\n")
+            os.system("curl -XDELETE 'localhost:9200/post,bathroom?pretty'")
             remove_db.append("app.db")
             remove_tree = ["DevelopmentInstance/migrations/"]
-            print("Adding Sqlite database back:\n")
-            os.system("flask db init -d 'DevelopmentInstance/migrations'")
-            os.system("flask db migrate -d 'DevelopmentInstance/migrations/'")
-            os.system("flask db upgrade  -d 'DevelopmentInstance/migrations/'")
-            print("Adding Elasticsearch index 'post': ")
-            os.system("curl -XPUT 'localhost:9200/post?pretty'")
 
         if apptype == "production":
-            print("Removing Bonsai Index 'post'\n")
+            print("Removing Bonsai Index 'post' and 'bathroom'\n")
             bonsai = app.config['BONSAI_URL']
-            os.system("curl -XDELETE '" + bonsai + "/post?pretty'")
+            os.system("curl -XDELETE '" + bonsai + "/post,bathroom?pretty'")
             print("Resetting postgreSQL database: \n")
             os.system("heroku pg:reset " + "postgresql-silhouetted-21445 --confirm i-gotta")
             remove_tree = ["migrations/", "logs/", "tmp/"]
-            print("Adding PostgreSQL database back: \n")
-            os.system("flask db init")
-            os.system("flask db migrate")
-            os.system("flask db upgrade")
-            print("Adding Bonsai Index 'post': \n")
-            os.system("curl -XPUT " + bonsai + " '/post?pretty'")
 
         try:
             concat_list = remove_db + remove_tree
@@ -84,6 +72,22 @@ def register(app):
                 if item in remove_tree and os.path.exists(item):
                     shutil.rmtree(item)
                     print("Removed Tree: " + item)
+            if apptype == "development":
+                print("Adding Sqlite database back:\n")
+                os.system("flask db init -d 'DevelopmentInstance/migrations'")
+                os.system("flask db migrate -d 'DevelopmentInstance/migrations/'")
+                os.system("flask db upgrade  -d 'DevelopmentInstance/migrations/'")
+                print("Adding Elasticsearch index 'post' and 'bathroom': ")
+                os.system("curl -XPUT 'localhost:9200/post?pretty'")
+                os.system("curl -XPUT 'localhost:9200/bathroom?pretty'")
+            if apptype == "production":
+                print("Adding PostgreSQL database back: \n")
+                os.system("flask db init")
+                os.system("flask db migrate")
+                os.system("flask db upgrade")
+                print("Adding Bonsai Index 'post' and 'bathroom': \n")
+                os.system("curl -XPUT " + bonsai + " '/post?pretty'")
+                os.system("curl -XPUT " + bonsai + " '/bathroom?pretty'")
 
         except Exception as e:
             print("Error Occured: go back to cli.py and define better exception messages if you want to know why!\nJust kidding, here you go:\n" + str(e))
