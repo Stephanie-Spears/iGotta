@@ -103,8 +103,6 @@ def create_production_app(config_class=ProductionConfig):
         'http_auth': (auth[0], auth[1])
     }]
     app.elasticsearch = Elasticsearch(es_header)
-    # curl - XPUT
-    # 'https://qf3n32mxmh:uc4ys1788y@privet-7530964.us-east-1.bonsaisearch.net/post?pretty'
 
     if app.config['MAIL_SERVER']:
         auth = None
