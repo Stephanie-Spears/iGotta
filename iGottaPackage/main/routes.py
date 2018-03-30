@@ -180,7 +180,7 @@ def add_bathroom():
 @login_required
 def bathroom(bathroom_name):
     new_bathroom = Bathroom.query.filter_by(bathroom_name=bathroom_name).first_or_404()
-    return render_template('bathroom.html', new_bathroom=new_bathroom)
+    return render_template('bathroom.html', bathroom=new_bathroom)
     # page = request.args.get('page', 1, type=int)
     # bathroom_posts = bathroom.bathroom_posts.order_by(Post.timestamp.desc()).paginate(page, current_app.config['POSTS_PER_PAGE'], False)
     # next_url = url_for('main.bathroom', bathroom_name=bathroom.bathroom_name, page=bathroom_posts.next_num) \
