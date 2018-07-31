@@ -1,0 +1,84 @@
+valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all -v /Users/wolfmac/clionprojects/musiclibrary/app
+
+g++ -Wall *.cpp -o app
+
+find ~/ -iname "*bash_profile*"
+
+
+(python ./tests.py->generates tmp file)-->run 'coverage
+
+¡Hola mundo, desde el entorno de producción!
+
+export FLASK_APP=igotta.py
+flask db init -d "DevelopmentInstance/migrations"
+flask db migrate -d "DevelopmentInstance/migrations/"
+flask db upgrade  -d "DevelopmentInstance/migrations/"
+
+
+Hello world, from the development environment!
+¡Hola mundo, del entorno de desarrollo!
+こんにちは、日本の開発アプリケーションから！
+
+Hola mundo, de España! ¡O tal vez México!
+こんにちは、日本からの世界！
+Привет мир, из России
+Hello world, from my America!
+
+
+$ heroku plugins:install heroku-repo
+$ heroku repo:purge_cache -a i-gotta
+$ git commit --allow-empty -m "Purge cache"
+$ git push heroku master
+
+elasticsearch
+for local cluster details visit -> localhost:9200
+
+python3 -m venv venv
+source venv/bin/activate
+pip install flask
+export FLASK_APP=igotta.py
+flask run
+
+flask db init
+flask db migrate -m "database change notes"
+flask db upgrade 	#With database servers like MySQL and PostgreSQL you have to 				#create the db in the db server before running upgrade in order to 			#apply the changes to the db
+
+flask shell
+from iGottaPackage import db
+from iGottaPackage.models import User, Post
+
+u = User(user_id=1, username='Stephanie', email='Spears111@gmail.com', password='cat', password2='cat')
+p = Post(body='Hello world, from production database initialization!', user_id=1)
+
+#u = User(username='John', email='John@example.com', password='cat', password2='cat')
+#p = Post(title='Taco Toots-day!', body='Located right inside Portland\'s spiciest Burrito spot, Anillo de Fuego!', address='2701 Southeast 32nd Avenue Portland OR', author=u)
+
+db.session.add(u)
+db.session.add(p)
+db.session.commit()
+
+users = User.query.all()
+for u in users:
+	db.session.delete(u)
+
+posts = Post.query.all()
+for p in posts:
+	db.session.delete(p)
+
+db.session.commit()
+
+
+b1 = Bathroom(title='Pu-Pu-Punk', picture='/static/img/post1.jpg', body='So punk. The most hardcore toilet in Portland. A literal shithole.', lat=45.520705, lng=-122.677570)
+
+b2 = Bathroom(title='Taco Toots-day', picture='/static/img/post2.jpg', body='Located right inside Portland's spiciest Burrito spot, Anillo de Fuego!', lat=45.511835, lng=-122.623733)
+
+b3 = Bathroom(title='Pastoral Pooper', picture='/static/img/post3.jpg', body='Tastefully decorated in a postmodern-minimalistic context, so you can gaze quiescently upon this rustic log while you drop some logs of your own.', lat=45.504649, lng=-122.623997)
+
+b4 = Bathroom(title='Super Duper Pooper', picture='/static/img/post4.jpg', body='It's a bathroom. OR IS IT?! It is.', lat=45.533118, lng=-122.653548)
+
+b5 = Bathroom(title='Taylor's House', picture='/static/img/post5.jpg', body='This is my friend Taylor's house. He loves surprises, so don't bother with knocking, just head on in! Second door on the left.', lat=45.519197, lng=-122.614354)
+
+b6 = Bathroom(title='Lorem I-Pee-Sum', picture='/static/img/post6.jpg', body='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', lat=45.536375, lng=-122.618581)
+
+db.session.add(b1)
+db.session.commit()
