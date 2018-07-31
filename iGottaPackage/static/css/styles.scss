@@ -1,6 +1,10 @@
 /* ---- imports ---- */
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:700);
 
+
+$font-stack: Comfortaa, cursive;
+
+
 html,body{
-    font-family: Comfortaa, cursive;
+    font-family: $font-stack;
 }
